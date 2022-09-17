@@ -6,7 +6,7 @@
 <head>
 
     @include('filetrack.includes.head')
-    @yield('title')
+    <title>LNMU : @yield('title')</title>
     @yield('header-area')
 
 </head>

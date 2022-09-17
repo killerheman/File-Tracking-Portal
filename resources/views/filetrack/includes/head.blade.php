@@ -31,3 +31,5 @@
 <!-- BEGIN: Custom CSS-->
 <link rel="stylesheet" type="text/css" href="{{asset('backend/assets/css/style.css')}}">
 <!-- END: Custom CSS-->
+<link rel="stylesheet" type="text/css" href="{{asset('backend/app-assets/vendors/css/extensions/toastr.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('backend/app-assets/css/plugins/extensions/toastr.css')}}">
