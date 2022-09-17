@@ -6,6 +6,8 @@
 <head>
 
     @include('backend.includes.head')
+    @yield('title')
+    @yield('header-area')
 
 </head>
 <!-- END: Head-->
@@ -42,6 +44,8 @@
 
 
     @include('backend.includes.foot')
+
+    @yield('script-area')
 
 </body>
 <!-- END: Body-->
