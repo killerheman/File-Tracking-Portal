@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'fileuser'=>[
+            'driver'=>'session',
+            'provider'=>'fileusers',
+        ]
     ],
 
     /*
@@ -64,6 +68,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'fileusers'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\FileUser::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',

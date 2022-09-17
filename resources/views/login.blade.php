@@ -67,17 +67,18 @@
                                         <p class="px-2">Welcome back, please login to your account.</p>
                                         <div class="card-content mb-2">
                                             <div class="card-body pt-1">
-                                                <form action="index.html">
+                                                <form action="{{ route('login') }}" method="post">
+                                                    @csrf
                                                     <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                                        <input type="text" class="form-control" id="user-name" placeholder="Username" required>
+                                                        <input type="email" class="form-control" name="email" id="user-name" placeholder="Email" required>
                                                         <div class="form-control-position">
                                                             <i class="feather icon-user"></i>
                                                         </div>
-                                                        <label for="user-name">Username</label>
+                                                        <label for="user-name">Email</label>
                                                     </fieldset>
 
                                                     <fieldset class="form-label-group position-relative has-icon-left">
-                                                        <input type="password" class="form-control" id="user-password" placeholder="Password" required>
+                                                        <input type="password" class="form-control" name="password" id="user-password" placeholder="Password" required>
                                                         <div class="form-control-position">
                                                             <i class="feather icon-lock"></i>
                                                         </div>
@@ -87,7 +88,7 @@
                                                         <div class="text-left">
                                                             <fieldset class="checkbox">
                                                                 <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                    <input type="checkbox">
+                                                                    <input type="checkbox" name="remember_me">
                                                                     <span class="vs-checkbox">
                                                                         <span class="vs-checkbox--check">
                                                                             <i class="vs-icon feather icon-check"></i>
