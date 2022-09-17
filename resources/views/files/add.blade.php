@@ -90,23 +90,64 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-10 offset-md-4">
-                                        <fieldset class="checkbox">
-                                            <div class="vs-checkbox-con vs-checkbox-primary">
-                                                <input type="checkbox">
-                                                <span class="vs-checkbox">
-                                                    <span class="vs-checkbox--check">
-                                                        <i class="vs-icon feather icon-check"></i>
-                                                    </span>
-                                                </span>
-                                                <span class="">Remember me</span>
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-2">
+                                                <span>File No</span>
                                             </div>
-                                        </fieldset>
+                                            <div class="col-md-6">
+                                                <div class="position-relative has-icon-left">
+                                                    @php $code=time().rand(0,9); @endphp
+                                                    <input type="number" id="contact-icon" class="form-control" name="contact-icon" placeholder="Subject" value='{{$code}}' readonly>
+                                                    <div class="form-control-position">
+                                                        <i class="fa fa-database"></i>
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="">{!! DNS1D::getBarcodeHTML($code, 'UPCA') !!}</div>
+                                               
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-10 offset-md-4">
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-2">
+                                                <span>Status Type</span>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="position-relative has-icon-left">
+                                                    <select data-placeholder="Select a state..." class="select2-icons form-control" id="select2-icons">
+                                                          
+                                                        <option value="wordpress2" data-icon="fa fa-wordpress" value='' selected hidden>--Select File Status --</option>
+                                                        <option value="" data-icon="fa fa-codepen">Verification</option>
+                                                        <option value="codepen" data-icon="fa fa-codepen">Confirmation</option>
+                                                        <option value="codepen" data-icon="fa fa-codepen">Query</option>
+                                                        <option value="codepen" data-icon="fa fa-codepen">Other</option>
+                                                  
+                                                     
+                                                </select>
+                                                    <div class="form-control-position">
+                                                        <i class="fa fa-th-list"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 row">
+                                    <div class="col-md-6 offset-md-2">
                                         <button type="submit" class="btn btn-primary mr-1 mb-1">Submit</button>
                                         <button type="reset" class="btn btn-outline-warning mr-1 mb-1">Reset</button>
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="mt-1">{!! DNS2D::getBarcodeHTML($code, 'QRCODE') !!}</div>
+                                    </div>
+                                </div>
+
+                                    
+    
+                                    {{-- <div class="mb-3">{!! DNS1D::getBarcodeHTML('4445645656', 'UPCA') !!}</div> --}}
                                 </div>
                             </div>
                         </form>
