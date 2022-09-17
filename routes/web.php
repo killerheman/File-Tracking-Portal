@@ -23,3 +23,4 @@ Route::get('/login', function () {
 });
 
 Route::get('/file-generate',[FileController::class,'index'])->name('file-generate');
+Route::post('/file-store',[FileController::class,'store'])->name('file-store');

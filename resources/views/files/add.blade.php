@@ -1,8 +1,10 @@
 @extends('backend.includes.layout')
 
+@section('title','Generate File')
 @push('head-area')
 <link rel="stylesheet" type="text/css" href="{{asset('backend/app-assets/css/core/colors/palette-gradient.cs')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('backend/app-assets/vendors/css/forms/select/select2.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('backend/app-assets/css/plugins/forms/validation/form-validation.css')}}">
 @endpush
 @section('content')
 
@@ -14,7 +16,8 @@
         
                 <div class="card-content">
                     <div class="card-body">
-                        <form class="form form-horizontal">
+                        <form class="form form-horizontal"  method="post" action="{{route('file-store')}}">
+                            @csrf
                             <div class="form-body">
                                 <div class="row">
                                     <div class="col-12">
@@ -24,10 +27,11 @@
                                             </div>
                                             <div class="col-md-10">
                                                 <div class="position-relative has-icon-left">
-                                                    <input type="text" id="fname-icon" class="form-control" name="fname-icon" placeholder="File Title">
+                                                    <input type="text" id="title" class="form-control" name="title" placeholder="File Title" @error('title') aria-invalid="true" @enderror required>
                                                     <div class="form-control-position">
                                                         <i class="fa fa-file-o"></i>
                                                     </div>
+                                                    @error('title') <div class="help-block"><ul role="alert"><li>{{$message}}</li></ul></div>@enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -40,11 +44,12 @@
                                             <div class="col-md-10">
                                                 <div class="position-relative has-icon-left">
                                                     <div class="form-group">
-                                                        <select data-placeholder="Select a state..." class="select2-icons form-control" id="select2-icons">
+                                                        <select data-placeholder="Select a type..." class="select2-icons form-control" id="type" name='type' @error('type') aria-invalid="true" @enderror required>
                                                           
-                                                                <option value="wordpress2" data-icon="fa fa-wordpress" value='' selected hidden>--Select File Type --</option>
-                                                                <option value="" data-icon="fa fa-codepen">Official</option>
-                                                                <option value="codepen" data-icon="fa fa-codepen">Departmental</option>
+                                                                <option value="" data-icon="fa fa-wordpress"  selected hidden>--Select File Type --</option>
+                                                               @foreach ($types as $type)
+                                                                   <option value="{{$type->id}}">{{strtoupper($type->name)}}</option>
+                                                               @endforeach
                                                           
                                                              
                                                         </select>
@@ -52,6 +57,8 @@
                                                     <div class="form-control-position">
                                                         <i class="fa fa-book"></i>
                                                     </div>
+                                                    
+                                                    @error('type') <div class="help-block"><ul role="alert"><li>{{$message}}</li></ul></div>@enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -63,11 +70,12 @@
                                             </div>
                                             <div class="col-md-10">
                                                 <div class="position-relative has-icon-left">
-                                                    <input type="text" id="contact-icon" class="form-control" name="contact-icon" placeholder="Subject">
+                                                    <input type="text" id="subject" class="form-control" placeholder="Subject" name='subject' @error('subject') aria-invalid="true" @enderror  required >
                                                     <div class="form-control-position">
                                                         <i class="fa fa-envelope"></i>
                                                     </div>
                                                 </div>
+                                                @error('subject') <div class="help-block"><ul role="alert"><li>{{$message}}</li></ul></div>@enderror
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +87,7 @@
                                             <div class="col-md-10">
                                                 <div class="position-relative has-icon-left">
                                                     <fieldset class="form-label-group mb-0">
-                                                        <textarea data-length=500 class="form-control char-textarea" id="textarea-counter" rows="3" placeholder="description"></textarea>
+                                                        <textarea data-length=500 class="form-control char-textarea" id="description" rows="3" name='description' placeholder="description"></textarea>
                                                         <label for="textarea-counter">Description</label>
                                                     </fieldset>
                                                     <small class="counter-value float-right"><span class="char-count">0</span> / 500 </small>
@@ -98,7 +106,7 @@
                                             <div class="col-md-6">
                                                 <div class="position-relative has-icon-left">
                                                     @php $code=time().rand(0,9); @endphp
-                                                    <input type="number" id="contact-icon" class="form-control" name="contact-icon" placeholder="Subject" value='{{$code}}' readonly>
+                                                    <input type="number" id="fileno" class="form-control" name="fileno" placeholder="Subject" value='{{$code}}' readonly required>
                                                     <div class="form-control-position">
                                                         <i class="fa fa-database"></i>
                                                     </div>
@@ -118,13 +126,12 @@
                                             </div>
                                             <div class="col-md-10">
                                                 <div class="position-relative has-icon-left">
-                                                    <select data-placeholder="Select a state..." class="select2-icons form-control" id="select2-icons">
+                                                    <select data-placeholder="Select a state..." class="select2-icons form-control" id="status" name='status' @error('status') aria-invalid="true" @enderror required>
                                                           
-                                                        <option value="wordpress2" data-icon="fa fa-wordpress" value='' selected hidden>--Select File Status --</option>
-                                                        <option value="" data-icon="fa fa-codepen">Verification</option>
-                                                        <option value="codepen" data-icon="fa fa-codepen">Confirmation</option>
-                                                        <option value="codepen" data-icon="fa fa-codepen">Query</option>
-                                                        <option value="codepen" data-icon="fa fa-codepen">Other</option>
+                                                        <option value="" data-icon="fa fa-wordpress" value='' selected hidden>--Select File Status --</option>
+                                                      @foreach ($status as $st)
+                                                          <option value="{{$st->id}}">{{strtoupper($st->name)}}</option>
+                                                      @endforeach
                                                   
                                                      
                                                 </select>
@@ -132,6 +139,7 @@
                                                         <i class="fa fa-th-list"></i>
                                                     </div>
                                                 </div>
+                                                @error('status') <div class="help-block"><ul role="alert"><li>{{$message}}</li></ul></div>@enderror
                                             </div>
                                         </div>
                                     </div>
@@ -145,7 +153,7 @@
                                     </div>
                                 </div>
 
-                                    
+                                {{-- <button type="button" class="btn btn-outline-success mr-1 mb-1" id="type-success">Success</button> --}}
     
                                     {{-- <div class="mb-3">{!! DNS1D::getBarcodeHTML('4445645656', 'UPCA') !!}</div> --}}
                                 </div>
@@ -159,6 +167,8 @@
 @endsection
 
 @push('script-area')
+<script src="{{asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js')}}"></script>
+<script src="{{asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
 <script src="{{asset('backend/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 <script src="{{asset('backend/app-assets/js/scripts/forms/select/form-select2.js')}}"></script>
     

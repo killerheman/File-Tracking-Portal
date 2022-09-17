@@ -6,9 +6,9 @@
 <head>
 
     @include('backend.includes.head')
-    @yield('title')
+    <title>LNMU : @yield('title')</title>
+    
     @yield('header-area')
-
 </head>
 <!-- END: Head-->
 
@@ -44,7 +44,8 @@
 
 
     @include('backend.includes.foot')
-
+   
+    
     @yield('script-area')
 
 </body>
