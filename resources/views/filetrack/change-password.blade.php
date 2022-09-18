@@ -1,11 +1,13 @@
 @extends('filetrack.includes.layout')
 
-@section('Head-Area')
+
+@section('title', 'Change Password')
+@section('head-area')
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/plugins/forms/form-validation.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/plugins/forms/pickers/form-flat-pickr.css') }}">
 @endsection
 
-@section('Content-Area')
+@section('content')
 
     <div class="card">
         <div class="card-header">
@@ -15,10 +17,10 @@
         </div>
         <div class="card-body">
             <form class="needs-validation"
-                action="{{ route('Backend.authuser.updatePassword') }}"
+                action="{{ route('filetrack.fileuser.updatePassword') }}"
                 method='post' enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="id" value="{{ Auth::user()->id }}" />
+                <input type="hidden" name="id" value="{{ Auth::guard('fileuser')->user()->id }}" />
                 <div class="row">
                     <div class="col-md-6 mb-1">
                         <label class="form-label" for="basic-addon-name">Current Password</label>
@@ -59,7 +61,7 @@
 @endsection
 
 
-@section('Script-Area')
+@section('script-area')
     {{-- <script src="{{asset('backend/assets/js/scripts/forms/form-validation.js')}}"></script> --}}
     <script src="{{ asset('backend/assets/vendors/js/tables/datatable/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('backend/assets/vendors/js/tables/datatable/dataTables.bootstrap5.min.js') }}"></script>

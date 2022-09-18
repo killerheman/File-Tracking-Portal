@@ -11,9 +11,10 @@
                                         class="ficon feather icon-menu"></i></a></li>
                         </ul>
                         <ul class="nav navbar-nav bookmark-icons">
-                            <li class="nav-item d-none d-lg-block"><a class="nav-link" href="sk-layout-2-columns.html"
-                                    data-toggle="tooltip" data-placement="top" title="2-Columns"><i
-                                        class="ficon feather icon-sidebar"></i></a></li>
+                            <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#"
+                                    data-toggle="tooltip" data-placement="top" title="Back"><i
+                                        class="ficon feather icon-arrow-left-circle"></i></a>
+                            </li>
                         </ul>
                         <ul class="nav navbar-nav">
                             <li class="nav-item d-none d-lg-block"><a class="nav-link bookmark-star"><i
@@ -52,160 +53,15 @@
                                 <ul class="search-list search-list-main"></ul>
                             </div>
                         </li>
-                        <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label"
-                                href="#" data-toggle="dropdown"><i
-                                    class="ficon feather icon-shopping-cart"></i><span
-                                    class="badge badge-pill badge-primary badge-up cart-item-count">6</span></a>
-                            <ul class="dropdown-menu dropdown-menu-media dropdown-cart dropdown-menu-right">
-                                <li class="dropdown-menu-header">
-                                    <div class="dropdown-header m-0 p-2">
-                                        <h3 class="white"><span class="cart-item-count">6</span><span
-                                                class="ml-50">Items</span></h3><span class="notification-title">In Your
-                                            Cart</span>
-                                    </div>
-                                </li>
-                                <li class="scrollable-container media-list"><a class="cart-item"
-                                        href="app-ecommerce-details.html">
-                                        <div class="media">
-                                            <div class="media-left d-flex justify-content-center align-items-center">
-                                                <img src="{{ asset('backend/app-assets/images/pages/eCommerce/4.png') }}"
-                                                    width="75" alt="Cart Item"></div>
-                                            <div class="media-body"><span
-                                                    class="item-title text-truncate text-bold-500 d-block mb-50">Apple
-                                                    - Apple Watch Series 1 42mm Space Gray Aluminum Case Black Sport
-                                                    Band - Space Gray Aluminum</span><span
-                                                    class="item-desc font-small-2 text-truncate d-block"> Durable,
-                                                    lightweight aluminum cases in silver, space gray,gold, and rose
-                                                    gold. Sport Band in a variety of colors. All the features of the
-                                                    original Apple Watch, plus a new dual-core processor for faster
-                                                    performance. All models run watchOS 3. Requires an iPhone 5 or later
-                                                    to run this device.</span>
-                                                <div class="d-flex justify-content-between align-items-center mt-1">
-                                                    <span class="align-middle d-block">1 x $299</span><i
-                                                        class="remove-cart-item feather icon-x danger font-medium-1"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a><a class="cart-item" href="app-ecommerce-details.html">
-                                        <div class="media">
-                                            <div class="media-left d-flex justify-content-center align-items-center">
-                                                <img class="mt-1 pl-50"
-                                                    src="{{ asset('backend/app-assets/images/pages/eCommerce/dell-inspirion.jpg') }}"
-                                                    width="100" alt="Cart Item"></div>
-                                            <div class="media-body"><span
-                                                    class="item-title text-truncate text-bold-500 d-block mb-50">Apple
-                                                    - Macbook® (Latest Model) - 12" Display - Intel Core M5 - 8GB Memory
-                                                    - 512GB Flash Storage - Space Gray</span><span
-                                                    class="item-desc font-small-2 text-truncate d-block"> MacBook
-                                                    delivers a full-size experience in the lightest and most compact Mac
-                                                    notebook ever. With a full-size keyboard, force-sensing trackpad,
-                                                    12-inch Retina display,1 sixth-generation Intel Core M processor,
-                                                    multifunctional USB-C port, and now up to 10 hours of battery life,2
-                                                    MacBook features big thinking in an impossibly compact form.</span>
-                                                <div class="d-flex justify-content-between align-items-center mt-1">
-                                                    <span class="align-middle d-block">1 x $1599.99</span><i
-                                                        class="remove-cart-item feather icon-x danger font-medium-1"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a><a class="cart-item" href="app-ecommerce-details.html">
-                                        <div class="media">
-                                            <div class="media-left d-flex justify-content-center align-items-center">
-                                                <img src="{{ asset('backend/app-assets/images/pages/eCommerce/7.png') }}"
-                                                    width="88" alt="Cart Item"></div>
-                                            <div class="media-body"><span
-                                                    class="item-title text-truncate text-bold-500 d-block mb-50">Sony -
-                                                    PlayStation 4 Pro Console</span><span
-                                                    class="item-desc font-small-2 text-truncate d-block"> PS4 Pro
-                                                    Dynamic 4K Gaming & 4K Entertainment* PS4 Pro gets you closer to
-                                                    your game. Heighten your experiences. Enrich your adventures. Let
-                                                    the super-charged PS4 Pro lead the way.** GREATNESS AWAITS</span>
-                                                <div class="d-flex justify-content-between align-items-center mt-1">
-                                                    <span class="align-middle d-block">1 x $399.99</span><i
-                                                        class="remove-cart-item feather icon-x danger font-medium-1"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a><a class="cart-item" href="app-ecommerce-details.html">
-                                        <div class="media">
-                                            <div class="media-left d-flex justify-content-center align-items-center">
-                                                <img src="{{ asset('backend/app-assets/images/pages/eCommerce/10.png') }}"
-                                                    width="75" alt="Cart Item"></div>
-                                            <div class="media-body"><span
-                                                    class="item-title text-truncate text-bold-500 d-block mb-50">Beats
-                                                    by Dr. Dre - Geek Squad Certified Refurbished Beats Studio Wireless
-                                                    On-Ear Headphones - Red</span><span
-                                                    class="item-desc font-small-2 text-truncate d-block"> Rock out to
-                                                    your favorite songs with these Beats by Dr. Dre Beats Studio
-                                                    Wireless GS-MH8K2AM/A headphones that feature a Beats Acoustic
-                                                    Engine and DSP software for enhanced clarity. ANC (Adaptive Noise
-                                                    Cancellation) allows you to focus on your tunes.</span>
-                                                <div class="d-flex justify-content-between align-items-center mt-1">
-                                                    <span class="align-middle d-block">1 x $379.99</span><i
-                                                        class="remove-cart-item feather icon-x danger font-medium-1"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a><a class="cart-item" href="app-ecommerce-details.html">
-                                        <div class="media">
-                                            <div class="media-left d-flex justify-content-center align-items-center">
-                                                <img class="mt-1 pl-50"
-                                                    src="{{ asset('backend/app-assets/images/pages/eCommerce/sony-75class-tv.jpg') }}"
-                                                    width="100" alt="Cart Item"></div>
-                                            <div class="media-body"><span
-                                                    class="item-title text-truncate text-bold-500 d-block mb-50">Sony -
-                                                    75" Class (74.5" diag) - LED - 2160p - Smart - 3D - 4K Ultra HD TV
-                                                    with High Dynamic Range - Black</span><span
-                                                    class="item-desc font-small-2 text-truncate d-block"> This Sony 4K
-                                                    HDR TV boasts 4K technology for vibrant hues. Its X940D series
-                                                    features a bold 75-inch screen and slim design. Wires remain hidden,
-                                                    and the unit is easily wall mounted. This television has a 4K
-                                                    Processor X1 and 4K X-Reality PRO for crisp video. This Sony 4K HDR
-                                                    TV is easy to control via voice commands.</span>
-                                                <div class="d-flex justify-content-between align-items-center mt-1">
-                                                    <span class="align-middle d-block">1 x $4499.99</span><i
-                                                        class="remove-cart-item feather icon-x danger font-medium-1"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a><a class="cart-item" href="app-ecommerce-details.html">
-                                        <div class="media">
-                                            <div class="media-left d-flex justify-content-center align-items-center">
-                                                <img class="mt-1 pl-50"
-                                                    src="{{ asset('backend/app-assets/images/pages/eCommerce/canon-camera.jpg') }}"
-                                                    width="70" alt="Cart Item"></div>
-                                            <div class="media-body"><span
-                                                    class="item-title text-truncate text-bold-500 d-block mb-50">Nikon
-                                                    - D810 DSLR Camera with AF-S NIKKOR 24-120mm f/4G ED VR Zoom Lens -
-                                                    Black</span><span
-                                                    class="item-desc font-small-2 text-truncate d-block"> Shoot
-                                                    arresting photos and 1080p high-definition videos with this Nikon
-                                                    D810 DSLR camera, which features a 36.3-megapixel CMOS sensor and a
-                                                    powerful EXPEED 4 processor for clear, detailed images. The AF-S
-                                                    NIKKOR 24-120mm lens offers shooting versatility. Memory card sold
-                                                    separately.</span>
-                                                <div class="d-flex justify-content-between align-items-center mt-1">
-                                                    <span class="align-middle d-block">1 x $4099.99</span><i
-                                                        class="remove-cart-item feather icon-x danger font-medium-1"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a></li>
-                                <li class="dropdown-menu-footer"><a class="dropdown-item p-1 text-center text-primary"
-                                        href="app-ecommerce-checkout.html"><i
-                                            class="feather icon-shopping-cart align-middle"></i><span
-                                            class="align-middle text-bold-600">Checkout</span></a></li>
-                                <li class="empty-cart d-none p-2">Your Cart Is Empty.</li>
-                            </ul>
-                        </li>
+
                         <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label"
                                 href="#" data-toggle="dropdown"><i class="ficon feather icon-bell"></i><span
                                     class="badge badge-pill badge-primary badge-up">5</span></a>
                             <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                                 <li class="dropdown-menu-header">
-                                    <div class="dropdown-header m-0 p-2">
-                                        <h3 class="white">5 New</h3><span class="grey darken-2">App
-                                            Notifications</span>
+                                    <div class="dropdown-header m-0 p-1">
+                                        <h5 class="white">5 New App
+                                            Notifications</h5>
                                     </div>
                                 </li>
                                 <li class="scrollable-container media-list">
@@ -278,20 +134,29 @@
                         <li class="dropdown dropdown-user nav-item"><a
                                 class="dropdown-toggle nav-link dropdown-user-link" href="#"
                                 data-toggle="dropdown">
-                                <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">John
-                                        Doe</span><span class="user-status">Available</span></div><span><img
+                                <div class="user-nav d-sm-flex d-none">
+                                    <span class="user-name text-bold-600">{{ Auth::guard('fileuser')->user()->full_name }}</span>
+                                        <span class="user-status">{{ Auth::guard('fileuser')->user()->roles[0]->name ?? 'User' }}</span></div><span><img
                                         class="round"
-                                        src="{{ asset('backend/app-assets/images/portrait/small/avatar-s-11.jpg') }}"
+                                        src="{{ asset(Auth::guard('fileuser')->user()->pic) }}"
                                         alt="avatar" height="40" width="40"></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#"><i
-                                        class="feather icon-user"></i> Edit Profile</a><a class="dropdown-item"
-                                    href="#"><i class="feather icon-mail"></i> My Inbox</a><a
-                                    class="dropdown-item" href="#"><i class="feather icon-check-square"></i>
-                                    Task</a><a class="dropdown-item" href="#"><i
-                                        class="feather icon-message-square"></i> Chats</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
-                                        class="feather icon-power"></i> Logout</a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="{{ route('filetrack.fileuser.show', Auth::guard('fileuser')->user()->id) }}"><i
+                                        class="feather icon-user"></i> Edit Profile
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item"
+                                    href="{{ route('filetrack.fileuser.changepassword', Auth::guard('fileuser')->user()->id) }}">
+                                    <i class="me-50" data-feather="user"></i> Change Password
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <form method="POST" action='{{ route('filetrack.logout') }}' id="my_form">
+                                    @csrf
+                                    <a class="dropdown-item" onclick="document.getElementById('my_form').submit();"><i
+                                            class="me-50" data-feather="power"></i> Logout
+                                    </a>
+                                </form>
                             </div>
                         </li>
                     </ul>

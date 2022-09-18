@@ -1,11 +1,15 @@
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
-            <li class="nav-item mr-auto"><a class="navbar-brand"
+            <li class="nav-item mr-auto">
+                <a class="navbar-brand"
                     href="#">
-                    <div class="brand-logo"></div>
-                    <h2 class="brand-text mb-0">LNMU</h2>
-                </a></li>
+                    <img class="" alt="logo" height="50" width="50"
+                    src="{{ asset('backend/app-assets/images/logo/newlnmu.gif') }}">
+                <h2 class="brand-text" style="color: #7C0000;">FileTracking</h2>
+                    {{-- <h2 class="brand-text mb-0">LNMU</h2> --}}
+                </a>
+            </li>
             <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
                         class="feather icon-x d-block d-xl-none font-medium-4 primary toggle-icon"></i><i
                         class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block primary"
@@ -43,7 +47,7 @@
             </li>
             <li class=" nav-item"><a
                     href="{{ route('filetrack.fileuser.index') }}"><i
-                        class="feather icon-folder"></i><span class="menu-title"
+                        class="feather icon-users"></i><span class="menu-title"
                         data-i18n="Documentation">File Users</span></a>
             </li>
         </ul>

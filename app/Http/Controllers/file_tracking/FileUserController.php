@@ -3,8 +3,17 @@
 namespace App\Http\Controllers\file_tracking;
 
 use App\Http\Controllers\Controller;
+use App\Models\Error;
+use App\Models\FileUser;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
+use Spatie\Permission\Models\Role;
 
 class FileUserController extends Controller
 {
@@ -16,8 +25,8 @@ class FileUserController extends Controller
     public function index()
     {
         $roles = Role::all();
-        $employees = User::get();
-        return view('Backend.setup.employee', compact('employees', 'roles'));
+        $employees = FileUser::get();
+        return view('filetrack.file_user', compact('employees', 'roles'));
     }
 
     /**
@@ -40,41 +49,40 @@ class FileUserController extends Controller
     {
         Log::info('request'.json_encode($request->all()));
         $request->validate([
-            'name'=>'required',
+            'first_name'=>'required',
+            'last_name'=>'nullable',
             'phone'=>'nullable',
             'email'=>'required',
-            'password'=>'nullable',
-            'pic'=>'image|nullable'
+            'pic'=>'image|nullable',
+            'roleid' => 'required'
         ]);
         try
         {
             if($request->hasFile('pic'))
             {
-                $emppic='emp-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
-                $request->pic->move(public_path('upload/employees/'),$emppic);
+                $fpic='fileuser-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+                $request->pic->move(public_path('upload/fileuser/'),$fpic);
             }
-            $maxempid = User::max('id');
-            $empid = 'BAAZ-'.sprintf('%5d', $maxempid+1);
-            $hashpassword = Hash::make($request->password);
+            $defaultPassword = '12345';
+            $hashpassword = Hash::make($defaultPassword);
             $data = [
-                'name' => $request->name,
-                'empid' => $empid,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
                 'phone' => $request->phone,
                 'email' => $request->email,
                 'password' => $hashpassword,
-                'aadharid' => $request->aadharid,
-                'pic'=>'upload/employees/'.$emppic
+                'pic'=>'upload/fileuser/'.$fpic
             ];
             $role = Role::find($request->roleid);
-            $res= User::create($data);
+            $res= FileUser::create($data);
             if($res)
             {
                 $res->assignRole($role->name);
-                session()->flash('success','Employee Added Sucessfully');
+                session()->flash('success','User Added Sucessfully');
             }
             else
             {
-                session()->flash('error','Employee not added ');
+                session()->flash('error','User not added ');
             }
         }
         catch(Exception $ex)
@@ -94,7 +102,7 @@ class FileUserController extends Controller
      */
     public function show($id)
     {
-        return view('Backend.user-profile');
+        return view('filetrack.user-profile');
     }
 
     /**
@@ -106,12 +114,12 @@ class FileUserController extends Controller
     public function edit($id)
     {
         $roles = Role::all();
-        $employees = User::get();
+        $employees = FileUser::get();
         $id=Crypt::decrypt($id);
-        $editemployee=User::find($id);
+        $editemployee=FileUser::find($id);
         if($editemployee)
         {
-            return view('Backend.setup.employee',compact('employees','editemployee','roles'));
+            return view('filetrack.file_user',compact('employees','editemployee','roles'));
         }
         else
         {
@@ -131,40 +139,39 @@ class FileUserController extends Controller
     {
         Log::info('update'.json_encode($request->all()));
         $request->validate([
-            'name'=>'required',
+            'first_name'=>'required',
+            'last_name'=>'nullable',
             'phone'=>'nullable',
             'email'=>'required',
-            'roleid'=>'required',
-            'aadharid' => 'nullable',
-            'pic'=>'image'
+            'pic'=>'image|nullable',
+            'roleid' => 'required'
         ]);
         try
         {
             if($request->hasFile('pic'))
             {
-                $emppic='emp-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
-                $request->pic->move(public_path('upload/employees/'),$emppic);
-                $oldpic=User::find($id)->pluck('pic')[0];
+                $fpic='fileuser-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+                $request->pic->move(public_path('upload/fileuser/'),$fpic);
+                $oldpic=FileUser::find($id)->pluck('pic')[0];
                 File::delete(public_path($oldpic));
-                User::find($id)->update(['pic' => 'upload/employees/'.$emppic]);
+                FileUser::find($id)->update(['pic' => 'upload/fileuser/'.$fpic]);
             }
             $data = [
                 'name' => $request->name,
                 'phone' => $request->phone,
-                'email' => $request->email,
-                'aadharid' => $request->aadharid
+                'email' => $request->email
             ];
             $role = Role::find($request->roleid);
-            $res= User::find($id)->update($data);
+            $res= FileUser::find($id)->update($data);
 
             if($res)
             {
-                User::find($id)->syncRoles($role->name);
-                session()->flash('success','Employee updated Sucessfully');
+                FileUser::find($id)->syncRoles($role->name);
+                session()->flash('success','User updated Sucessfully');
             }
             else
             {
-                session()->flash('error','Employee not updated ');
+                session()->flash('error','User not updated ');
             }
         }
         catch(Exception $ex)
@@ -186,14 +193,14 @@ class FileUserController extends Controller
     {
         $id=Crypt::decrypt($id);
         try{
-                $res=User::find($id)->delete();
+                $res=FileUser::find($id)->delete();
                 if($res)
                 {
-                    session()->flash('success','Employee deleted ducessfully');
+                    session()->flash('success','User deleted sucessfully');
                 }
                 else
                 {
-                    session()->flash('error','Employee not deleted ');
+                    session()->flash('error','User not deleted ');
                 }
             }
             catch(Exception $ex)
@@ -207,34 +214,36 @@ class FileUserController extends Controller
 
     public function changePassword()
     {
-        return view('Backend.change-password');
+        return view('filetrack.change-password');
     }
 
     public function updateProfile(Request $request)
     {
         Log::info('update'.json_encode($request->all()));
         $request->validate([
-            'name'=>'required',
+            'first_name'=>'required',
+            'last_name'=>'nullable',
             'phone'=>'nullable',
             'email'=>'required',
-            'pic'=>'image'
+            'pic'=>'image|nullable'
         ]);
         try
         {
             if($request->hasFile('pic'))
             {
-                $emppic='emp-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
-                $request->pic->move(public_path('upload/employees/'),$emppic);
-                $oldpic=User::find($request->id)->pluck('pic')[0];
+                $emppic='fileuser-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+                $request->pic->move(public_path('upload/fileuser/'),$emppic);
+                $oldpic=FileUser::find($request->id)->pluck('pic')[0];
                 File::delete(public_path($oldpic));
-                User::find($request->id)->update(['pic' => 'upload/employees/'.$emppic]);
+                FileUser::find($request->id)->update(['pic' => 'upload/fileuser/'.$emppic]);
             }
             $data = [
-                'name' => $request->name,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
                 'phone' => $request->phone,
                 'email' => $request->email
             ];
-            $res = User::find($request->id)->update($data);
+            $res = FileUser::find($request->id)->update($data);
             if($res)
             {
                 session()->flash('success','User updated Sucessfully');
@@ -264,10 +273,10 @@ class FileUserController extends Controller
         {
             if($request->new_password == $request->cnew_password)
             {
-                $user = User::find($request->id);
+                $user = FileUser::find($request->id);
                 if(Hash::check($request->current_password, $user->password))
                 {
-                    $res = User::find($request->id)->update(['password' => Hash::make($request->new_password)]);
+                    $res = FileUser::find($request->id)->update(['password' => Hash::make($request->new_password)]);
                     if($res)
                     {
                         session()->flash('success','Password changed Sucessfully');

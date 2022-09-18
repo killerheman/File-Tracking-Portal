@@ -1,25 +1,28 @@
-@extends('layouts.adminLayout')
+@extends('filetrack.includes.layout')
 
-@section('Head-Area')
-    <link rel="stylesheet" type="text/css" href="{{ asset('BackEnd/assets/css/plugins/forms/form-validation.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('BackEnd/assets/css/plugins/forms/pickers/form-flat-pickr.css') }}">
+@section('title', 'File Users')
+
+@section('head-area')
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/plugins/forms/form-validation.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/plugins/forms/pickers/form-flat-pickr.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('backend/assets/vendors/css/forms/select/select2.min.css')}}">
 @endsection
 
-@section('Content-Area')
-@can('Employee_create')
+@section('content')
+
     <div class="card">
         <div class="card-header">
             <h3>
                 @if (!isset($editemployee))
-                    Add New Employee
+                    Add New User
                 @else
-                    Edit Employee Details
+                    Edit User Details
                 @endif
             </h3>
         </div>
         <div class="card-body">
             <form class="needs-validation"
-                action="{{ isset($editemployee) ? route('Backend.authuser.update', $editemployee->id) : route('Backend.authuser.store') }}"
+                action="{{ isset($editemployee) ? route('filetrack.fileuser.update', $editemployee->id) : route('filetrack.fileuser.store') }}"
                 method='post' enctype="multipart/form-data">
                 @if (isset($editemployee))
                     @method('patch')
@@ -27,10 +30,17 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-6 mb-1">
-                        <label class="form-label" for="basic-addon-name">Name</label>
+                        <label class="form-label" for="basic-addon-name">First Name</label>
 
-                        <input type="text" id="basic-addon-name" name='name' class="form-control"
-                            value="{{ isset($editemployee) ? $editemployee->name : '' }}" placeholder="Enter name"
+                        <input type="text" id="basic-addon-name" name='first_name' class="form-control"
+                            value="{{ isset($editemployee) ? $editemployee->name : '' }}" placeholder="Enter first name"
+                            aria-label="Name" aria-describedby="basic-addon-name" required />
+                    </div>
+                    <div class="col-md-6 mb-1">
+                        <label class="form-label" for="basic-addon-name">Last Name</label>
+
+                        <input type="text" id="basic-addon-name" name='last_name' class="form-control"
+                            value="{{ isset($editemployee) ? $editemployee->name : '' }}" placeholder="Enter last name"
                             aria-label="Name" aria-describedby="basic-addon-name" required />
                     </div>
                     <div class="col-md-6 mb-1">
@@ -47,17 +57,9 @@
                             value="{{ isset($editemployee) ? $editemployee->email : '' }}" placeholder="Enter email"
                             aria-label="email" aria-describedby="basic-addon-name" required />
                     </div>
-                    @if (!isset($editemployee))
-                    <div class="col-md-6 mb-1">
-                        <label class="form-label" for="basic-addon-name">Password</label>
-                        <input type="text" id="basic-addon-name" name='password' class="form-control"
-                            value="{{ isset($editemployee) ? $editemployee->password : '' }}" placeholder="Enter password"
-                            aria-label="password" aria-describedby="basic-addon-name" required />
-                    </div>
-                    @endif
                     <div class="col-md-6 mb-1">
                         <label class="form-label" for="desc">Role Name</label>
-                        <select class="select2 form-select" id="select2-basic"  name='roleid' required>
+                        <select class="form-control select2 form-select" id="select2-basic"  name='roleid' required>
                         @if(isset($editemployee))
                               <option selected hidden value='{{$editemployee->roles[0]->id ?? ''}}'>{{$editemployee->roles[0]->name ?? ''}}</option>
                         @else
@@ -67,13 +69,6 @@
                                 <option value="{{$role->id}}">{{$role->name}}</option>
                             @endforeach
                         </select>
-                    </div>
-                    <div class="col-md-6 mb-1">
-                        <label class="form-label" for="basic-addon-name">Aadhar Id</label>
-
-                        <input type="number" id="basic-addon-name" name='aadharid' class="form-control"
-                            value="{{ isset($editemployee) ? $editemployee->aadharid : '' }}" placeholder="Enter aadhar id"
-                            aria-label="email" aria-describedby="basic-addon-name" required />
                     </div>
                     <div class="col-md-6 mb-1">
                         <label class="form-label" for="pic">Image Thumbnail</label>
@@ -96,28 +91,23 @@
             </form>
         </div>
     </div>
-@endcan
 
-@can('Employee_read')
     <div class="card">
         <div class="card-header">
-            <h3>Manage Employees</h3>
+            <h3>Manage Users</h3>
         </div>
         <div class="card-body" style="overflow-y: auto;">
-            <table class="datatables-basic table datatable table-responsive">
+            <table class="datatables-basic table datatable ">
                 <thead>
                     <tr>
                         <th>Sr.No</th>
-                        <th>Emp Id</th>
                         <th>Image</th>
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th>Aadhar</th>
-                        @canany(['Employee_edit', 'Employee_delete'])
-                            <th>Action</th>
-                        @endcan
+                        <th>Action</th>
+
                     </tr>
 
                 </thead>
@@ -125,17 +115,15 @@
                     @foreach ($employees as $employee)
                         <tr>
                             <td>{{ $loop->index+1 }}</td>
-                            <td>{{ $employee->empid }}</td>
                             <td>
                                 <img src="{{ asset( $employee->pic) }}" class="me-75 bg-light-danger"
                                     style="height:60px;width:60px;" />
                             </td>
-                            <td>{{ $employee->name }}</td>
+                            <td>{{ $employee->full_name }}</td>
                             <td>{{ $employee->phone }}</td>
                             <td>{{ $employee->email }}</td>
                             <td>{{ $employee->roles[0]->name ?? '' }}</td>
-                            <td>{{ $employee->aadharid }}</td>
-                            @canany(['Employee_edit', 'Employee_delete'])
+
                             <td>
                                 <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
                                     <div class="mb-1 breadcrumb-right">
@@ -145,48 +133,49 @@
                                                 aria-expanded="false"><i data-feather="grid"></i></button>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 @php $eid=Crypt::encrypt($employee->id); @endphp
-                                                @can('Employee_edit')
-                                                <a class="dropdown-item" href="{{ route('Backend.authuser.edit', $eid) }}"><i
+
+                                                <a class="dropdown-item" href="{{ route('filetrack.fileuser.edit', $eid) }}"><i
                                                         class="me-1" data-feather="check-square"></i><span
                                                         class="align-middle">Edit</span>
                                                 </a>
-                                                @endcan
-                                                @can('Employee_delete')
+
+
                                                 <a class="dropdown-item" href=""
                                                 onclick="event.preventDefault();document.getElementById('delete-form-{{ $eid }}').submit();"><i
                                                     class="me-1" data-feather="message-square"></i><span
                                                     class="align-middle">Delete</span>
                                                 </a>
-                                                @endcan
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                            @endcan
+
                         </tr>
-                        @can('Employee_delete')
-                        <form id="delete-form-{{ $eid }}" action="{{ route('Backend.authuser.destroy', $eid) }}"
+
+                        <form id="delete-form-{{ $eid }}" action="{{ route('filetrack.fileuser.destroy', $eid) }}"
                             method="post" style="display: none;">
                             @method('DELETE')
                             @csrf
                         </form>
-                        @endcan
                     @endforeach
 
                 </tbody>
             </table>
         </div>
     </div>
-@endcan
+
 @endsection
 
 
-@section('Script-Area')
+@section('script-area')
     {{-- <script src="{{asset('BackEnd/assets/js/scripts/forms/form-validation.js')}}"></script> --}}
-    <script src="{{ asset('Backend/assets/vendors/js/tables/datatable/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('Backend/assets/vendors/js/tables/datatable/dataTables.bootstrap5.min.js') }}"></script>
-    <script src="{{ asset('Backend/assets/vendors/js/tables/datatable/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('Backend/assets/vendors/js/tables/datatable/responsive.bootstrap5.js') }}"></script>
-    <script src="{{ asset('Backend/assets/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/vendors/js/tables/datatable/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/vendors/js/tables/datatable/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/vendors/js/tables/datatable/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/vendors/js/tables/datatable/responsive.bootstrap5.js') }}"></script>
+    <script src="{{ asset('backend/assets/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{asset('backend/assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
+    <script src="{{asset('backend/assets/js/scripts/forms/form-select2.js')}}"></script>
 @endsection

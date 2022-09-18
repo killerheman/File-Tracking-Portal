@@ -12,4 +12,9 @@ class FileUser extends Authenticatable
 {
     use HasFactory, SoftDeletes, HasRoles;
     protected $guarded = [];
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name. ' '. $this->last_name;
+    }
 }

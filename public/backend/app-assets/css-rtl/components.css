@@ -3394,7 +3394,7 @@ input[type='date'].form-control, input[type='time'].form-control, input[type='da
 }
 
 .floating-label-form-group-with-focus label, .floating-label-form-group-with-value label {
-  color : #7367F0 !important;
+  color : #7C0000!important;
   text-transform : uppercase;
   font-weight : 400;
 }
@@ -3414,7 +3414,7 @@ input[type='date'].form-control, input[type='time'].form-control, input[type='da
 }
 .select2-container--classic .select2-selection--single:focus, .select2-container--default .select2-selection--single:focus {
   outline : 0;
-  border-color : #7367F0 !important;
+  border-color : #7C0000!important;
   box-shadow : 0 3px 10px 0 rgba(0, 0, 0, 0.15) !important;
 }
 .select2-container--classic .select2-selection--single .select2-selection__rendered i, .select2-container--default .select2-selection--single .select2-selection__rendered i {
@@ -3425,7 +3425,7 @@ input[type='date'].form-control, input[type='time'].form-control, input[type='da
 }
 
 .select2-container--classic.select2-container--open .select2-selection--single, .select2-container--default.select2-container--open .select2-selection--single {
-  border-color : #7367F0 !important;
+  border-color : #7C0000!important;
   outline : 0;
 }
 
@@ -3433,7 +3433,7 @@ input[type='date'].form-control, input[type='time'].form-control, input[type='da
   outline : 0;
 }
 .select2-container--classic.select2-container--focus .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--multiple {
-  border-color : #7367F0 !important;
+  border-color : #7C0000!important;
   outline : 0;
 }
 
@@ -3443,12 +3443,12 @@ input[type='date'].form-control, input[type='time'].form-control, input[type='da
 }
 .select2-container--classic .select2-selection--multiple:focus, .select2-container--default .select2-selection--multiple:focus {
   outline : 0;
-  border-color : #7367F0 !important;
+  border-color : #7C0000!important;
   box-shadow : 0 3px 10px 0 rgba(0, 0, 0, 0.15) !important;
 }
 .select2-container--classic .select2-selection--multiple .select2-selection__choice, .select2-container--default .select2-selection--multiple .select2-selection__choice {
-  background-color : #7367F0 !important;
-  border-color : #4839EB !important;
+  background-color : #7C0000!important;
+  border-color : #00aeef !important;
   color : #FFFFFF;
   padding : 5px;
 }
@@ -3536,7 +3536,7 @@ input[type='date'].form-control, input[type='time'].form-control, input[type='da
 }
 
 .select2 .form-control::focus {
-  border-color : #7367F0 !important;
+  border-color : #7C0000!important;
 }
 
 table.dataTable {
@@ -3586,8 +3586,8 @@ table.dataTable.complex-headers thead th, table.dataTable.complex-headers thead 
 }
 table.dataTable tbody tr.selected {
   background-color : rgba(115, 103, 240, 0.05) !important;
-  color : #7367F0 !important;
-  box-shadow : 0 0 1px 0 #7367F0 !important;
+  color : #7C0000!important;
+  box-shadow : 0 0 1px 0 #7C0000!important;
   border-radius : 5px;
 }
 table.dataTable tbody tr.selected td, table.dataTable tbody tr.selected th {

@@ -1,11 +1,13 @@
 @extends('filetrack.includes.layout')
 
-@section('Head-Area')
+@section('title', 'Edit Profile')
+
+@section('head-area')
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/plugins/forms/form-validation.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/plugins/forms/pickers/form-flat-pickr.css') }}">
 @endsection
 
-@section('Content-Area')
+@section('content')
 
     <div class="card">
         <div class="card-header">
@@ -15,45 +17,46 @@
         </div>
         <div class="card-body">
             <form class="needs-validation"
-                action="{{route('Backend.authuser.updateProfile') }}"
+                action="{{route('filetrack.fileuser.updateProfile') }}"
                 method='post' enctype="multipart/form-data">
                 @if (isset($editproduct))
                     @method('patch')
                 @endif
                 @csrf
-                <input type="hidden" name="id" value="{{ Auth::user()->id }}" />
+                <input type="hidden" name="id" value="{{ Auth::guard('fileuser')->user()->id }}" />
                 <div class="row">
                     <div class="col-md-3 mb-1">
-                        <img src="{{ asset(Auth::user()->pic) }}" class="me-75 bg-light-danger"
-                            style="height:100px;width:150px;" />
+                        <img src="{{ asset(Auth::guard('fileuser')->user()->pic) }}" class="me-75 bg-light-danger"
+                            style="height:100px;width:100px;" />
                     </div>
                     <div class="col-md-4 mb-1 justify-content-start">
-                        <h3>{{ Auth::user()->name }}</h3>
+                        <h3>{{ Auth::guard('fileuser')->user()->full_name }}</h3>
                     </div>
                     <div class="col-md-4 mb-1 justify-content-start">
-                        Role : <h3>{{ Auth::user()->roles[0]->name }}</h3>
+                        Role : <h3>{{ Auth::guard('fileuser')->user()->roles[0]->name }}</h3>
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-1">
-                        <label class="form-label" for="basic-addon-name">Employee Id</label>
+                        <label class="form-label" for="basic-addon-name">First Name</label>
 
-                        <input type="text" id="basic-addon-name" name='empid' class="form-control"
-                            value="{{ Auth::user()->empid }}" placeholder="Employee Id" disabled required />
+                        <input type="text" id="basic-addon-name" name='first_name' class="form-control"
+                            value="{{ Auth::guard('fileuser')->user()->first_name }}" placeholder="First Name"
+                            aria-label="Name" aria-describedby="basic-addon-name" required />
                     </div>
                     <div class="col-md-6 mb-1">
-                        <label class="form-label" for="basic-addon-name">Name</label>
+                        <label class="form-label" for="basic-addon-name">Last Name</label>
 
-                        <input type="text" id="basic-addon-name" name='name' class="form-control"
-                            value="{{ Auth::user()->name }}" placeholder="Name"
+                        <input type="text" id="basic-addon-name" name='last_name' class="form-control"
+                            value="{{ Auth::guard('fileuser')->user()->last_name }}" placeholder="Name"
                             aria-label="Name" aria-describedby="basic-addon-name" required />
                     </div>
                     <div class="col-md-6 mb-1">
                         <label class="form-label" for="basic-addon-name">Email</label>
 
                         <input type="email" id="basic-addon-name" name='email' class="form-control"
-                            value="{{ Auth::user()->email }}" placeholder="Email"
+                            value="{{ Auth::guard('fileuser')->user()->email }}" placeholder="Email"
                             aria-label="Name" aria-describedby="basic-addon-name" required />
                     </div>
 
@@ -61,7 +64,7 @@
                         <label class="form-label" for="basic-addon-name">Phone</label>
 
                         <input type="text" id="basic-addon-name" name='phone' class="form-control"
-                            value="{{ Auth::user()->mobileno }}" placeholder="Phone"
+                            value="{{ Auth::guard('fileuser')->user()->mobileno }}" placeholder="Phone"
                             aria-label="Name" aria-describedby="basic-addon-name"/>
                     </div>
                     <div class="col-md-6 mb-1">

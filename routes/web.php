@@ -40,6 +40,11 @@ Route::group(['prefix'=>'filetracking','as'=>'filetrack.','middleware'=>'auth:fi
     Route::get('roles-has-permission',[PermissionController::class,'roleHasPermission'])->name('roleHasPermission');
     Route::get('view-role/{id}',[RoleController::class,'viewRole'])->name('viewRole');
 
+    Route::get('change-password',[FileUserController::class, 'changePassword'])->name('fileuser.changepassword');
+    Route::post('update-profile',[FileUserController::class, 'updateProfile'])->name('fileuser.updateProfile');
+    Route::post('update-password',[FileUserController::class, 'updatePassword'])->name('fileuser.updatePassword');
+
+
 });
 
 Route::get('/optimize', function(){
