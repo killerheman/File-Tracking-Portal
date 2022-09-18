@@ -28,7 +28,7 @@ Route::post('/login', [AdminController::class, 'login'])->name('login');
 
 
 
-Route::group(['prefix'=>'filetracking','as'=>'filetrack.'],function(){
+Route::group(['prefix'=>'filetracking','as'=>'filetrack.','middleware'=>'auth:fileuser'],function(){
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::post('logout',[AdminController::class,'logout'])->name('logout');
     Route::resource('fileuser',FileUserController::class);
