@@ -142,19 +142,17 @@
                                         alt="avatar" height="40" width="40"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="{{ route('filetrack.fileuser.show', Auth::guard('fileuser')->user()->id) }}"><i
-                                        class="feather icon-user"></i> Edit Profile
+                                <a class="dropdown-item" href="{{ route('filetrack.fileuser.show', Auth::guard('fileuser')->user()->id) }}"><i class="feather icon-user"></i> Edit Profile
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item"
                                     href="{{ route('filetrack.fileuser.changepassword', Auth::guard('fileuser')->user()->id) }}">
-                                    <i class="me-50" data-feather="user"></i> Change Password
+                                    <i class="feather icon-lock"></i> Change Password
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <form method="POST" action='{{ route('filetrack.logout') }}' id="my_form">
                                     @csrf
-                                    <a class="dropdown-item" onclick="document.getElementById('my_form').submit();"><i
-                                            class="me-50" data-feather="power"></i> Logout
+                                    <a class="dropdown-item" onclick="document.getElementById('my_form').submit();"><i class="feather icon-settings"></i> Logout
                                     </a>
                                 </form>
                             </div>

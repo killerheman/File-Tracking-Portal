@@ -13,7 +13,8 @@ class AdminController extends Controller
     {
         if(Auth::guard('fileuser')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember_me))
         {
-            session()->flash('success','Welcome Admin !');
+            $welcomeMessage = 'Welcome '. Auth::guard('fileuser')->user()->first_name. ' !';
+            session()->flash('success', $welcomeMessage);
             return redirect()->route('filetrack.dashboard');
         }
         else {
