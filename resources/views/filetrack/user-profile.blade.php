@@ -64,7 +64,7 @@
                         <label class="form-label" for="basic-addon-name">Phone</label>
 
                         <input type="text" id="basic-addon-name" name='phone' class="form-control"
-                            value="{{ Auth::guard('fileuser')->user()->mobileno }}" placeholder="Phone"
+                            value="{{ Auth::guard('fileuser')->user()->phone }}" placeholder="Phone"
                             aria-label="Name" aria-describedby="basic-addon-name"/>
                     </div>
                     <div class="col-md-6 mb-1">

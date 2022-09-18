@@ -24,7 +24,7 @@ class AdminController extends Controller
 
     public function logout()
     {
-        Auth::logout();
+        Auth::guard('fileuser')->logout();
         Session::flush();
         session()->flash('success','Logout Successfully !');
         return redirect('/');
