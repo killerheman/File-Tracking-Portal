@@ -11,12 +11,20 @@
 <div class="card">
     <div class="card-header">
         <h4 class="card-title">Generate New File</h4>
+        @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div>{{$error}}</div>
+        @endforeach
+    @endif
     </div>
     <div class="card-body">
 
                 <div class="card-content">
                     <div class="card-body">
-                        <form class="form form-horizontal"  method="post" action="{{route('filetrack.file-generate.store')}}">
+                        <form class="form form-horizontal"  method="post" action="{{isset($file)?route('filetrack.file-generate.update',Crypt::encrypt($file->id)):route('filetrack.file-generate.store')}}">
+                            @isset($file)
+                                @method('PATCH')
+                            @endisset
                             @csrf
                             <div class="form-body">
                                 <div class="row">
@@ -46,7 +54,7 @@
                                                     <div class="form-group">
                                                         <select data-placeholder="Select a type..." class="select2-icons form-control" id="type" name='type' @error('type') aria-invalid="true" @enderror required>
 
-                                                                <option {{isset($file)?"value=''":"value='$file->file_type_id'"}}  data-icon="fa fa-wordpress"  selected hidden>{{$file->type->name??'--Select File Type --'}}</option>
+                                                                <option {{isset($file)?"value=$file->file_type_id":"value=''"}}  data-icon="fa fa-wordpress"  selected hidden>{{$file->type->name??'--Select File Type --'}}</option>
                                                                @foreach ($types as $type)
                                                                    <option value="{{$type->id}}">{{strtoupper($type->name)}}</option>
                                                                @endforeach
@@ -131,7 +139,7 @@
                                                 <div class="position-relative has-icon-left">
                                                     <select data-placeholder="Select a state..." class="select2-icons form-control" id="status" name='status' @error('status') aria-invalid="true" @enderror required>
 
-                                                        <option {{isset($file)?"value='$file->status'":"value=''"}} data-icon="fa fa-wordpress" value='' selected hidden>{{isset()}}--Select File Status --</option>
+                                                        <option {{isset($file)?"value=$file->status":"value=''"}} data-icon="fa fa-wordpress" value='' selected hidden>{{isset($file)?$file->filestatus->name:'--Select File Status --'}}</option>
                                                       @foreach ($status as $st)
                                                           <option value="{{$st->id}}">{{strtoupper($st->name)}}</option>
                                                       @endforeach

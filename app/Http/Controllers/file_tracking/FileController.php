@@ -110,9 +110,32 @@ class FileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
-        //
+        $req->validate([
+                'title'=>'required',
+                'type'=>'required',
+                'subject'=>'required',
+                'fileno'=>'required|unique:document_files,file_number,'.Crypt::decrypt($id),
+                'status'=>'required'
+            
+        ]);
+        $res=DocumentFile::find(Crypt::decrypt($id))->update([
+            'title'=>$req->title,
+            'file_type_id'=>$req->type,
+            'subject'=>$req->subject,
+            'description'=>$req->description,
+            'status'=>$req->status,
+        ]);
+        if($res){
+            Session::flash('info','File Updated');
+            
+        }
+        else
+        {
+            Session::flash('error','Something went wrong Please try again ');
+        }
+        return redirect()->route('filetrack.file-generate.index');
     }
 
     /**

@@ -30,8 +30,8 @@
                         <td>{!! DNS1D::getBarcodeHTML($file->file_number, 'UPCA') !!}</td>
                         <td><div id='qr'>{!! DNS2D::getBarcodeHTML($file->file_number, 'QRCODE',2,2) !!}</div></td>
                         <td>{{$file->subject}}</td>
-                        <td>{{$file->type->name}}</td>
-                        <td>{{$file->filestatus->name}}</td>
+                        <td>{{$file->type->name??''}}</td>
+                        <td>{{$file->filestatus->name??''}}</td>
                         <td>{{$file->mode->name}}</td>
                         @can('show_all_files') <td>{{$file->created_by_user->full_name}}</td> @endcan
                         <td>
