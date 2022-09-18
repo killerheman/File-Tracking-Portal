@@ -27,7 +27,7 @@
                                             </div>
                                             <div class="col-md-10">
                                                 <div class="position-relative has-icon-left">
-                                                    <input type="text" id="title" class="form-control" name="title" placeholder="File Title" @error('title') aria-invalid="true" @enderror required>
+                                                    <input type="text" id="title" class="form-control" name="title" placeholder="File Title" value="{{$file->title??''}}" @error('title') aria-invalid="true" @enderror required>
                                                     <div class="form-control-position">
                                                         <i class="fa fa-file-o"></i>
                                                     </div>
@@ -46,7 +46,7 @@
                                                     <div class="form-group">
                                                         <select data-placeholder="Select a type..." class="select2-icons form-control" id="type" name='type' @error('type') aria-invalid="true" @enderror required>
 
-                                                                <option value="" data-icon="fa fa-wordpress"  selected hidden>--Select File Type --</option>
+                                                                <option {{isset($file)?"value=''":"value='$file->file_type_id'"}}  data-icon="fa fa-wordpress"  selected hidden>{{$file->type->name??'--Select File Type --'}}</option>
                                                                @foreach ($types as $type)
                                                                    <option value="{{$type->id}}">{{strtoupper($type->name)}}</option>
                                                                @endforeach
@@ -70,7 +70,7 @@
                                             </div>
                                             <div class="col-md-10">
                                                 <div class="position-relative has-icon-left">
-                                                    <input type="text" id="subject" class="form-control" placeholder="Subject" name='subject' @error('subject') aria-invalid="true" @enderror  required >
+                                                    <input type="text" id="subject" value="{{isset($file)?$file->subject:''}}" class="form-control" placeholder="Subject" name='subject' @error('subject') aria-invalid="true" @enderror  required >
                                                     <div class="form-control-position">
                                                         <i class="fa fa-envelope"></i>
                                                     </div>
@@ -87,7 +87,9 @@
                                             <div class="col-md-10">
                                                 <div class="position-relative has-icon-left">
                                                     <fieldset class="form-label-group mb-0">
-                                                        <textarea data-length=500 class="form-control char-textarea" id="description" rows="3" name='description' placeholder="description"></textarea>
+                                                        <textarea data-length=500 class="form-control char-textarea" id="description" rows="3" name='description' placeholder="description">
+                                                            {{isset($file)?$file->description:''}}
+                                                        </textarea>
                                                         <label for="textarea-counter">Description</label>
                                                     </fieldset>
                                                     <small class="counter-value float-right"><span class="char-count">0</span> / 500 </small>
@@ -105,7 +107,8 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="position-relative has-icon-left">
-                                                    @php $code=time().rand(0,9); @endphp
+                                                   
+                                                    @php $code=isset($file)?$file->file_number:time().rand(0,9); @endphp
                                                     <input type="number" id="fileno" class="form-control" name="fileno" placeholder="Subject" value='{{$code}}' readonly required>
                                                     <div class="form-control-position">
                                                         <i class="fa fa-database"></i>
@@ -128,7 +131,7 @@
                                                 <div class="position-relative has-icon-left">
                                                     <select data-placeholder="Select a state..." class="select2-icons form-control" id="status" name='status' @error('status') aria-invalid="true" @enderror required>
 
-                                                        <option value="" data-icon="fa fa-wordpress" value='' selected hidden>--Select File Status --</option>
+                                                        <option {{isset($file)?"value='$file->status'":"value=''"}} data-icon="fa fa-wordpress" value='' selected hidden>{{isset()}}--Select File Status --</option>
                                                       @foreach ($status as $st)
                                                           <option value="{{$st->id}}">{{strtoupper($st->name)}}</option>
                                                       @endforeach

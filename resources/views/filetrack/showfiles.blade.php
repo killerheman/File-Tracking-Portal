@@ -33,7 +33,7 @@
                         <td>{{$file->type->name}}</td>
                         <td>{{$file->filestatus->name}}</td>
                         <td>{{$file->mode->name}}</td>
-                        @can('show_all_files') <td>{{$file->created_by_user->fname}}</td> @endcan
+                        @can('show_all_files') <td>{{$file->created_by_user->full_name}}</td> @endcan
                         <td>
                             <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,9 +41,9 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     @if($file->mode->name=='generated')
-                                    <a class="dropdown-item" href="#"> <i class="fa fa-pencil-square-o text-warning"></i> Edit</a>
+                                    <a class="dropdown-item" href="{{route('filetrack.file-generate.edit',Crypt::encrypt($file->id))}}"> <i class="fa fa-pencil-square-o text-warning"></i> Edit</a>
                                     @endif
-                                    <a class="dropdown-item" href="#"> <i class="fa fa-eye text-primary"></i> View</a>
+                                    <a class="dropdown-item" href="{{route('filetrack.file-generate.show',Crypt::encrypt($file->id))}}"> <i class="fa fa-eye text-primary"></i> View</a>
                                     @if($file->mode->name=='generated')
                                     <a class="dropdown-item" href="#"> <i class="fa fa-trash text-danger"></i> Delete</a>
                                     @endif

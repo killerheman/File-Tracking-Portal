@@ -50,6 +50,22 @@
                         class="feather icon-users"></i><span class="menu-title"
                         data-i18n="Documentation">File Users</span></a>
             </li>
+
+            <li class=" nav-item"><a href="#"><i class="fa fa-folder-open"></i><span class="menu-title"
+                data-i18n="Starter kit">File System</span></a>
+        <ul class="menu-content">
+            <ul class="menu-content">
+                <li><a href="{{ route('filetrack.file-generate.index') }}"><i></i><span class="menu-item"
+                    data-i18n="Roles">Generate New File</span></a>
+                </li>
+                <li><a href="{{ route('filetrack.file-generate.create') }}"><i></i><span class="menu-item"
+                    data-i18n="Permissions">View Files</span></a>
+                </li>
+              
+
+            </ul>
+        </ul>
+    </li>
         </ul>
     </div>
 </div>

@@ -10,6 +10,7 @@ use App\Models\FileStatus;
 use App\Models\FileType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
 use League\CommonMark\Node\Block\Document;
 
@@ -84,7 +85,7 @@ class FileController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -95,7 +96,11 @@ class FileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $id=Crypt::decrypt($id);
+        $file=DocumentFile::find($id);
+        $types=FileType::all();
+        $status=FileStatus::all();
+        return view('filetrack.add',compact('types','status','file'));
     }
 
     /**
