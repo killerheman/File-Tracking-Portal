@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <h2 class="text-bold-700 mt-1 mb-25">5  </h2>
-                        <p class="mb-0">Users</p>
+                        <p class="mb-0">Generated Files</p>
                     </div>
                     <div class="card-content">
                         <div id="subscribe-gain-chart"></div>
@@ -65,7 +65,7 @@
                             </div>
                         </div>
                         <h2 class="text-bold-700 mt-1 mb-25"> 5 </h2>
-                        <p class="mb-0">Brands</p>
+                        <p class="mb-0">Incoming Files</p>
                     </div>
                     <div class="card-content">
                         <div id="orders-received-chart"></div>
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                         <h2 class="text-bold-700 mt-1 mb-25"> 3 </h2>
-                        <p class="mb-0">Models</p>
+                        <p class="mb-0">Recieved Files</p>
                     </div>
                     <div class="card-content">
                         <div id="subscribe-gain-chart"></div>
@@ -97,13 +97,74 @@
                             </div>
                         </div>
                         <h2 class="text-bold-700 mt-1 mb-25">34</h2>
-                        <p class="mb-0">Orders Received</p>
+                        <p class="mb-0">Transfered Files</p>
                     </div>
                     <div class="card-content">
                         <div id="orders-received-chart"></div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+    <section id="overlay-image-chat-cards">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card overlay-img-card text-white">
+                    <img src="{{ asset('backend/app-assets/images/pages/card-image-6.jpg')}}" class="card-img" alt="card-img-6">
+                    <div class="card-img-overlay overlay-black d-flex flex-column justify-content-between">
+                        <h5 class="card-title text-white">Quote of the day</h5>
+                        <div class="card-content">
+                            <script type="text/javascript" src="https://www.brainyquote.com/link/quotebr.js"></script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card overlay-img-card text-white">
+                    <img src="{{ asset('backend/app-assets/images/pages/card-image-5.jpg')}}" class="card-img" alt="card-img-6">
+                    <div class="card-img-overlay overlay-black">
+                        <h5 class="font-medium-5 text-white text-center mt-4">Snowy</h5>
+                        <p class="text-white text-center">New York</p>
+                        <div class="card-content">
+                            <div class="d-flex justify-content-around mt-2">
+                                <div class="icon">
+                                    <i class="feather icon-cloud-snow font-large-5"></i>
+                                </div>
+                                <div class="temprature mt-3">
+                                    <p class="font-large-3"> -6 <span class="mt-1">°</span></p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mt-4">
+                                    <div class="precipitation">
+                                        <span class="font-medium-3">Precipitation</span>
+                                    </div>
+                                    <div class="degree">
+                                        <span class="font-medium-3">48%</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between my-2">
+                                    <div class="humidity">
+                                        <span class="font-medium-3">Humidity</span>
+                                    </div>
+                                    <div class="degree">
+                                        <span class="font-medium-3">60%</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between my-2">
+                                    <div class="wind">
+                                        <span class="font-medium-3">Wind</span>
+                                    </div>
+                                    <div class="degree">
+                                        <span class="font-medium-3">23 km/h</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
     <script src="{{ asset('backend/assets/js/scripts/pages/dashboard-analytics.js') }}"></script>

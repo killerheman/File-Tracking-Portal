@@ -53,6 +53,9 @@
                 <section class="row flexbox-container">
                     <div class="col-xl-8 col-11 d-flex justify-content-center">
                         <div class="card bg-authentication rounded-0 mb-0">
+                            {{-- <div class="row">
+                                <img src="{{ asset('backend/app-assets/images/logo/newlnmu.gif') }}" height="100" width="100" />
+                            </div> --}}
                             <div class="row m-5">
                                 <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
                                     <img src="{{asset('backend/app-assets/images/pages/file-tracking-login.jpg')}}" alt="branding logo">
