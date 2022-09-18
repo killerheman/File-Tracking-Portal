@@ -16,7 +16,7 @@
 
                 <div class="card-content">
                     <div class="card-body">
-                        <form class="form form-horizontal"  method="post" action="{{route('file-store')}}">
+                        <form class="form form-horizontal"  method="post" action="{{route('filetrack.file-generate.store')}}">
                             @csrf
                             <div class="form-body">
                                 <div class="row">

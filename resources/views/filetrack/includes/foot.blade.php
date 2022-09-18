@@ -22,14 +22,14 @@
 
 <script>
  @if($msg=Session::get('success'))
-  toastr.success("{{$msg}}",'Done ! ', { "progressBar": true });
+  toastr.success("{!! $msg !!}",'Done ! ', { "progressBar": true });
   @elseif($msg=Session::get('error'))
-  toastr.error( "{{$msg}}",'OOP\'s !', { "progressBar": true });
+  toastr.error( "{!! $msg !!}",'OOP\'s !', { "progressBar": true });
   @elseif($msg=Session::get('fail'))
-  toastr.error( "{{$msg}}",'OOP\'s !', { "progressBar": true });
+  toastr.error( "{!! $msg !!}",'OOP\'s !', { "progressBar": true });
  @elseif($msg=Session::get('warning'))
- toastr.warning( "{{$msg}}",'Attension !', { "progressBar": true });
+ toastr.warning( "{!! $msg !!}",'Attension !', { "progressBar": true });
  @elseif($msg=Session::get('info'))
- toastr.info("{{$msg}}",'Info !',{ "progressBar": true });
+ toastr.info("{!! $msg !!}",'Info !',{ "progressBar": true });
  @endif
 </script>
