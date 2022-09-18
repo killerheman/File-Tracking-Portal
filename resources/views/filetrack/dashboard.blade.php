@@ -1,5 +1,6 @@
 @extends('filetrack.includes.layout')
 
+@section('title','File Tracking Dashboard')
 @section('header-area')
 <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/pages/dashboard-analytics.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/pages/card-analytics.css') }}">

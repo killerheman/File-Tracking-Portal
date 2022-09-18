@@ -51,7 +51,7 @@
             <h3>Manage Roles</h3>
         </div>
         <div class="card-body">
-            <table class="datatables-basic table datatable table-responsive w-100">
+            <table class="datatables-basic table datatable  w-100">
                 <thead>
                     <tr>
                         <th>Sr.No</th>
