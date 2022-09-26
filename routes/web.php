@@ -33,6 +33,9 @@ Route::group(['prefix'=>'filetracking','as'=>'filetrack.','middleware'=>'auth:fi
     Route::post('logout',[AdminController::class,'logout'])->name('logout');
     Route::resource('fileuser',FileUserController::class);
     Route::resource('file-generate',FileController::class);
+    Route::get('generated-files',[FileController::class,'generatedFiles'])->name('generated-Files');
+    Route::post('file-transfer',[FileController::class,'transfer_file'])->name('file-transfer');
+    Route::get('arriving-files',[FileController::class,'arriving_files'])->name('arriving-files');
     Route::resource('role',RoleController::class);
     Route::resource('permission',PermissionController::class);
     Route::get('user-permission',[PermissionController::class,'userPermission'])->name('userPermission');

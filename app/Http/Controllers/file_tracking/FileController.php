@@ -7,7 +7,9 @@ use App\Http\Requests\DocumentFileReq;
 use App\Models\DocumentFile;
 use App\Models\FileMode;
 use App\Models\FileStatus;
+use App\Models\FileTracking;
 use App\Models\FileType;
+use App\Models\FileUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -35,7 +37,7 @@ class FileController extends Controller
      */
     public function create()
     {
-        if(Auth::guard('fileuser')->user()->hasPermissionTo('show_all_files')){
+        if(Auth::guard('fileuser')->user()->hasPermissionTo('Show_all_files')){
             $files=DocumentFile::paginate(10);
             
         }
@@ -44,7 +46,9 @@ class FileController extends Controller
             $files=DocumentFile::where('created_by',Auth::guard('fileuser')->user()->id)->paginate(10);
         }
 
-        return view('filetrack.showfiles',compact('files'));
+        $users=FileUser::all()->except(Auth::guard('fileuser')->user()->id);
+        $status=FileStatus::all();
+        return view('filetrack.showfiles',compact('files','users','status'));
     }
 
     /**
@@ -65,8 +69,17 @@ class FileController extends Controller
             'file_mode_id'=>FileMode::where('name','generated')->first()->id,
             'status'=>$req->status,
             'created_by'=>Auth::guard('fileuser')->user()->id,
+            'current_user'=>Auth::guard('fileuser')->user()->id,
         ]);
         if($res){
+
+            FileTracking::create([
+                'file_id'=>$res->id,
+                'sender_id'=>Auth::guard('fileuser')->user()->id,
+                'mode_id'=>FileMode::where('name','generated')->first()->id,
+                'status'=>$req->status,
+                'remark'=>'File Generated'
+            ]);
             Session::flash('info','File Generated <br/> <b>File Code - </b>'.$res->file_code);
             
         }
@@ -85,7 +98,8 @@ class FileController extends Controller
      */
     public function show($id)
     {
-        
+        $file=DocumentFile::find(crypt::decrypt($id));
+        return view('filetrack.show',compact('file'));
     }
 
     /**
@@ -148,4 +162,55 @@ class FileController extends Controller
     {
         //
     }
+
+    public function generatedFiles()
+    {
+        if(Auth::guard('fileuser')->user()->hasPermissionTo('Show_all_files')){
+            $files=DocumentFile::where('file_mode_id',FileMode::where('name','generated')->first()->id)->paginate(10);
+        }else{
+            $files=DocumentFile::where('created_by',Auth::guard('fileuser')->user()->id)->where('file_mode_id',FileMode::where('name','generated')->first()->id)->paginate(10);
+        }
+
+        return view('filetrack.generated-file',compact('files'));
+    }
+
+
+    public function transfer_file(Request $req)
+    {
+        $res=DocumentFile::find($req->fileid)->update([
+            'file_mode_id'=>FileMode::where('name','transfering')->first()->id,
+            'status'=>$req->status,
+            'transfer_by'=>Auth::guard('fileuser')->user()->id,
+            'current_user'=>$req->transferid,
+
+        ]);
+        if($res){
+            $res2=FileTracking::create([
+                'file_id'=>$req->fileid,
+                'reciever_id'=>$req->transferid,
+                'mode_id'=>FileMode::where('name','transfering')->first()->id,
+                'status'=>$req->status,
+                'remark'=>$req->Remark,
+                'description'=>$req->description,
+            ]);
+
+            if($res2){
+                Session::flash('info','File is transfer');
+            }
+            else
+            {
+                Session::flash('error','File can\'t transfer right now');
+            }
+            return redirect()->back();
+
+        }
+    }
+
+
+    public function arriving_files()
+    {
+        $files=DocumentFile::where('file_mode_id',FileMode::where('name','transfering')->first()->id)->where('current_user',Auth::guard('fileuser')->user()->id)->get();
+        return view('filetrack.arriving-files',compact('files'));
+    }
+
 }

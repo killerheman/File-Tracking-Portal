@@ -61,7 +61,12 @@
                 <li><a href="{{ route('filetrack.file-generate.create') }}"><i></i><span class="menu-item"
                     data-i18n="Permissions">View Files</span></a>
                 </li>
-              
+                <li><a href="{{ route('filetrack.generated-Files') }}"><i></i><span class="menu-item"
+                    data-i18n="Permissions">Generated Files</span></a>
+                </li>
+                <li><a href="{{ route('filetrack.arriving-files') }}"><i></i><span class="menu-item"
+                    data-i18n="Permissions">Arriving Files</span></a>
+                </li>
 
             </ul>
         </ul>

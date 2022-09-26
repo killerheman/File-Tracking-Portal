@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->boolean('is_active')->default(1);
             $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('transfer_by')->nullable();
+            $table->unsignedBigInteger('current_user');
             $table->softDeletes();
             $table->timestamps();
         });

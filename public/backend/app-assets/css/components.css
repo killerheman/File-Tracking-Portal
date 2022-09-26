@@ -3623,3 +3623,125 @@ tr.group {
             justify-content : center;
   }
 }
+
+
+.timeline {
+  padding: 0;
+  margin-bottom: 0;
+  margin-left: 1rem;
+  list-style: none; }
+
+.timeline .timeline-item {
+  position: relative;
+  padding-left: 2.5rem;
+  border-left: 1px solid #ebe9f1; }
+
+.timeline .timeline-item:not(:last-child) {
+  padding-bottom: 1.8rem; }
+
+.timeline .timeline-item .timeline-point {
+  position: absolute;
+  left: -0.85rem;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.75rem;
+  width: 1.75rem;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid #7367f0;
+  background-color: #fff; }
+
+.timeline .timeline-item .timeline-point.timeline-point-indicator {
+  left: -0.412rem;
+  top: 0.07rem;
+  height: 12px;
+  width: 12px;
+  border: 0;
+  background-color: #7367f0; }
+
+.timeline .timeline-item .timeline-point.timeline-point-indicator:before {
+  content: '';
+  background: rgba(115, 103, 240, 0.12);
+  height: 20px;
+  width: 20px;
+  display: block;
+  position: absolute;
+  top: -0.285rem;
+  left: -0.285rem;
+  border-radius: 50%; }
+
+.timeline .timeline-item .timeline-point i,
+.timeline .timeline-item .timeline-point svg {
+  color: #7367f0;
+  font-size: 0.85rem;
+  vertical-align: baseline; }
+
+.timeline .timeline-item .timeline-event {
+  position: relative;
+  width: 100%;
+  min-height: 4rem; }
+
+.timeline .timeline-item .timeline-event .timeline-event-time {
+  font-size: 0.85rem;
+  color: #b9b9c3; }
+
+.timeline .timeline-item:last-of-type {
+  border-left-color: transparent !important; }
+
+.timeline .timeline-item:last-of-type:after {
+  content: '';
+  position: absolute;
+  left: -1px;
+  bottom: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(#ebe9f1, transparent); }
+
+  .avatar img {
+    border-radius: 50%;
+}
+
+.avatar {
+  white-space: nowrap;
+  background-color: #c3c3c3;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  color: #fff;
+  display: inline-flex;
+  font-size: 1rem;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 600;
+}
+.avatar-group {
+  display: flex;
+  justify-content: flex-start;
+}
+.avatar-group .avatar {
+  transition: all 0.25s ease;
+}
+.avatar-group .avatar img, .avatar-group .avatar .avatar-content {
+  box-shadow: 0 0 0 2px #fff, inset 0 0 0 1px rgb(34 41 47 / 7%);
+}
+
+.avatar-group .avatar:not(:first-child) {
+  margin-left: -0.55rem;
+}
+
+.avatar.avatar-sm .avatar-content {
+  width: 24px;
+  height: 24px;
+}
+.avatar .avatar-content {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 0.857rem;
+}

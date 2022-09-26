@@ -28,4 +28,18 @@ class DocumentFile extends Model
     {
         return $this->belongsTo(FileUser::class,'created_by');
     }
+
+    public function current_location()
+    {
+        return $this->belongsTo(Fileuser::class,'current_user');
+    }
+
+    public function transfer_by()
+    {
+        return $this->belongsTo(FileUser::class,'transfer_by');
+    }
+    public function tracking()
+    {
+        return $this->hasMany(FileTracking::class,'file_id');
+    }
 }

@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('file_trackings', function (Blueprint $table) {
             $table->id();
             $table->string('file_id');
-            $table->string('sender_id');
-            $table->string('reciever_id');
+            $table->string('sender_id')->nullable();
+            $table->string('reciever_id')->nullable();
             $table->string('mode_id');
             $table->string('status');
-            $table->string('remark');
-            $table->longText('description');
+            $table->string('remark')->nullable();
+            $table->longText('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
