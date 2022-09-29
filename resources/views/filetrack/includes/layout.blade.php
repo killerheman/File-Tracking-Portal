@@ -40,12 +40,14 @@
     <div class="drag-target"></div>
 
 
+    @include('filetrack.includes.modals')
     @include('filetrack.includes.footer')
 
 
     @include('filetrack.includes.foot')
 
     @yield('script-area')
+
 
 </body>
 <!-- END: Body-->

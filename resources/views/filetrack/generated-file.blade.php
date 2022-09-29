@@ -47,7 +47,7 @@
                                     @if($file->mode->name=='generated')
                                     <a class="dropdown-item" href="#"> <i class="fa fa-trash text-danger"></i> Delete</a>
                                     @endif
-                                    <a class="dropdown-item" href="#"> <i class="fa fa-share text-info"></i> Transfer</a>
+                                    <a class="dropdown-item transfer" href="javascript:void(0)" data-index="{{$file->id}}"> <i class="fa fa-share text-info"></i> Transfer</a>
                                 </div>
                             </div>
                         </td>

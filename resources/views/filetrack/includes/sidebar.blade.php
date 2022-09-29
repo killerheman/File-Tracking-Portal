@@ -35,11 +35,19 @@
                         <li><a href="{{ route('filetrack.file-generate.index') }}"><i></i><span class="menu-item"
                                     data-i18n="Roles">Generate New File</span></a>
                         </li>
-                        <li><a href="{{ route('filetrack.file-generate.create') }}"><i></i><span class="menu-item"
-                                    data-i18n="Permissions">View Files</span></a>
+                        <li><a href="{{ route('filetrack.generated-Files') }}"><i></i><span class="menu-item"
+                            data-i18n="Permissions">New Generated Files</span></a>
+                        </li>
+                        <li><a href="{{ route('filetrack.file-generate.create') }}"><i></i><span class="menu-item" data-i18n="Permissions">My Files</span></a>
                         </li>
 
-
+                       
+                        <li><a href="{{ route('filetrack.arriving-files') }}"><i></i><span class="menu-item"
+                            data-i18n="Permissions">Arriving Files</span></a>
+                        </li>
+                        <li><a href="{{ route('filetrack.pending-files') }}"><i></i><span class="menu-item"
+                            data-i18n="Permissions">Pending Files</span></a>
+                        </li>
                     </ul>
                 </ul>
             </li>
@@ -60,12 +68,7 @@
                 <li><a href="{{ route('filetrack.roleHasPermission') }}"><i></i><span class="menu-item"
                     data-i18n="Role Has Permission">Role Has Permission</span></a>
                 </li>
-                <li><a href="{{ route('filetrack.generated-Files') }}"><i></i><span class="menu-item"
-                    data-i18n="Permissions">Generated Files</span></a>
-                </li>
-                <li><a href="{{ route('filetrack.arriving-files') }}"><i></i><span class="menu-item"
-                    data-i18n="Permissions">Arriving Files</span></a>
-                </li>
+             
 
             </ul>
         </ul>

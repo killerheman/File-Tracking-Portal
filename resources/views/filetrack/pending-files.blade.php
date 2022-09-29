@@ -13,9 +13,9 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Arriving Files</h3>
+        <h3 class="card-title">Pending Files</h3>
     </div>
-    <div class="card-body"  style="overflow: auto">
+    <div class="card-body">
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -50,7 +50,7 @@
                                     <a class="dropdown-item" href="#"> <i class="fa fa-trash text-danger"></i> Delete</a>
                                     @endif
                                     @if($file->current_user==Auth::guard('fileuser')->user()->id || Auth::guard('fileuser')->user()->hasPermissionTo('Show_all_files_edit'))
-                                    <a class="dropdown-item accept" href="#" data-index='{{$file->id}}' > <i class="fa fa-hand-paper-o text-success"></i>Accept</a>
+                                    <a class="dropdown-item transfer" href="#" data-index='{{$file->id}}' > <i class="fa fa-hand-paper-o text-success"></i>Accept</a>
                                     @endif
                                 </div>
                             </div>

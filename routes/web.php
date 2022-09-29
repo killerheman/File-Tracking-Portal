@@ -35,14 +35,15 @@ Route::group(['prefix'=>'filetracking','as'=>'filetrack.','middleware'=>'auth:fi
     Route::resource('file-generate',FileController::class);
     Route::get('generated-files',[FileController::class,'generatedFiles'])->name('generated-Files');
     Route::post('file-transfer',[FileController::class,'transfer_file'])->name('file-transfer');
+    Route::get('pending-files',[FileController::class,'pending_files'])->name('pending-files');
     Route::get('arriving-files',[FileController::class,'arriving_files'])->name('arriving-files');
+    Route::post('file-accept',[FileController::class,'accept_reject_file'])->name('file-accept');
     Route::resource('role',RoleController::class);
     Route::resource('permission',PermissionController::class);
     Route::get('user-permission',[PermissionController::class,'userPermission'])->name('userPermission');
     Route::post('assign-permission',[PermissionController::class,'assignPermission'])->name('assignPermission');
     Route::get('roles-has-permission',[PermissionController::class,'roleHasPermission'])->name('roleHasPermission');
     Route::get('view-role/{id}',[RoleController::class,'viewRole'])->name('viewRole');
-
     Route::get('change-password',[FileUserController::class, 'changePassword'])->name('fileuser.changepassword');
     Route::post('update-profile',[FileUserController::class, 'updateProfile'])->name('fileuser.updateProfile');
     Route::post('update-password',[FileUserController::class, 'updatePassword'])->name('fileuser.updatePassword');

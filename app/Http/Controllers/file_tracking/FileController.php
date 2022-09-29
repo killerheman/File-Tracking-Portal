@@ -10,6 +10,7 @@ use App\Models\FileStatus;
 use App\Models\FileTracking;
 use App\Models\FileType;
 use App\Models\FileUser;
+use Database\Seeders\filemode as SeedersFilemode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -211,6 +212,37 @@ class FileController extends Controller
     {
         $files=DocumentFile::where('file_mode_id',FileMode::where('name','transfering')->first()->id)->where('current_user',Auth::guard('fileuser')->user()->id)->get();
         return view('filetrack.arriving-files',compact('files'));
+    }
+
+    public function pending_files()
+    {
+        $files=DocumentFile::where('file_mode_id',FileMode::where('name','recieved')->first()->id)->where('current_user',Auth::guard('fileuser')->user()->id)->get();
+        return view('filetrack.pending-files',compact('files'));
+    }
+
+    public function accept_reject_file(Request $req)
+    {
+        $file=DocumentFile::find($req->fileid)->update([
+            'file_mode_id'=>FileMode::where('name',$req->mode)->first()->id,
+        ]);
+        if($file){
+           $ft= FileTracking::create([
+                'file_id'=>$req->fileid,
+                'reciever_id'=>Auth::guard('fileuser')->user()->id,
+                'mode_id'=>FileMode::where('name',$req->mode)->first()->id,
+                'status'=>$req->name,
+                'remark'=>$req->Remark,
+            ]);
+            if(isset($ft)){
+            Session::flash('success','File '.$req->mode.' By '.$req->name);
+            }
+            else
+            {
+                Session::flash('error','Tracking not Possible for this stage');
+            }
+        }
+        return redirect()->back();
+       
     }
 
 }

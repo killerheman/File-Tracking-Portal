@@ -33,3 +33,16 @@
  toastr.info("{!! $msg !!}",'Info !',{ "progressBar": true });
  @endif
 </script>
+<script>
+    $(document).on('click','.transfer',function(){
+        var fileid=$(this).data('index');
+       $('#mfileid').val(fileid);
+       $('#transfermodal').modal('show');
+    });
+    $(document).on('click','.accept',function(){
+    var a=$(this).data('index');
+    $('#acmfileid').val(a);
+    $('#acmmode').val('recieved');
+    $('#acceptmodal').modal('show');
+});
+</script>
