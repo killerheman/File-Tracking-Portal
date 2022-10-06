@@ -29,9 +29,14 @@ class FileTracking extends Model
         return $this->belongsTo(FileUser::class,'created_by');
     }
 
-    public function current_location()
+    public function userto()
     {
-        return $this->belongsTo(Fileuser::class,'current_user');
+        if($this->sender_id!=null){
+        return $this->belongsTo(FileUser::class,'sender_id');
+        }
+        else if($this->reciever_id!=null){
+            return $this->belongsTo(FileUser::class,'reciever_id');
+        }
     }
 
     public function transfer_by()

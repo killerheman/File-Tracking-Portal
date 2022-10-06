@@ -10,6 +10,7 @@ use App\Models\FileStatus;
 use App\Models\FileTracking;
 use App\Models\FileType;
 use App\Models\FileUser;
+use App\Models\OfficeDepartment;
 use Database\Seeders\filemode as SeedersFilemode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,15 @@ class FileController extends Controller
     {
         $types=FileType::all();
         $status=FileStatus::all();
-        return view('filetrack.add',compact('types','status'));
+        if(Auth::guard('fileuser')->user()->hasRole('Master File User'))
+        {
+             $filetype2=OfficeDepartment::all();
+        }
+        else if(Auth::guard('fileuser')->user()->hasRole('Mid File User')){
+            
+            $filetype2=OfficeDepartment::find('id',Auth::guard('fileuser')->user()->off_dep_id);
+        }
+        return view('filetrack.add',compact('types','status','filetype2'));
     }
 
     /**
@@ -62,9 +71,10 @@ class FileController extends Controller
     {
         $res=DocumentFile::create([
             'title'=>$req->title,
-            'file_code'=>substr(FileType::find($req->type)->name,0,3).DocumentFile::max('id')+1,
+            'file_code'=>OfficeDepartment::find($req->type_main)->sort_name.'-'.DocumentFile::max('id')+1,
             'file_number'=>$req->fileno,
             'file_type_id'=>$req->type,
+            'file_type_main_id'=>$req->type_main,
             'subject'=>$req->subject,
             'description'=>$req->description,
             'file_mode_id'=>FileMode::where('name','generated')->first()->id,
@@ -166,11 +176,9 @@ class FileController extends Controller
 
     public function generatedFiles()
     {
-        if(Auth::guard('fileuser')->user()->hasPermissionTo('Show_all_files')){
-            $files=DocumentFile::where('file_mode_id',FileMode::where('name','generated')->first()->id)->paginate(10);
-        }else{
+        
             $files=DocumentFile::where('created_by',Auth::guard('fileuser')->user()->id)->where('file_mode_id',FileMode::where('name','generated')->first()->id)->paginate(10);
-        }
+      
 
         return view('filetrack.generated-file',compact('files'));
     }
@@ -245,4 +253,22 @@ class FileController extends Controller
        
     }
 
+    public function file_search()
+    {
+        return view('filetrack.search');
+    }
+
+    public function showAllFiles()
+    {
+        if(Auth::guard('fileuser')->user()->hasRole('Master File User')){
+            $files=DocumentFile::paginate(20);
+        }
+        else if(Auth::guard('fileuser')->user()->hasRole('Mid File User')){
+            $files=DocumentFile::where('file_type_main_id',Auth::guard('fileuser')->user()->off_dep_id)->paginate(20);
+        }
+        else{
+
+        }
+        return view('filetrack.allfiles',compact('files'));
+    }
 }

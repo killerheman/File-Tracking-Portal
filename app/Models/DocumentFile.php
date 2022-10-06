@@ -42,4 +42,8 @@ class DocumentFile extends Model
     {
         return $this->hasMany(FileTracking::class,'file_id');
     }
+    public function FileTypeMain()
+    {
+        return $this->belongsTo(OfficeDepartment::class,'file_type_main_id');
+    }
 }

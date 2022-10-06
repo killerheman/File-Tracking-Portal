@@ -5,6 +5,7 @@ namespace App\Http\Controllers\file_tracking;
 use App\Http\Controllers\Controller;
 use App\Models\Error;
 use App\Models\FileUser;
+use App\Models\OfficeDepartment;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -25,8 +26,9 @@ class FileUserController extends Controller
     public function index()
     {
         $roles = Role::all();
+        $depoffs=OfficeDepartment::all();
         $employees = FileUser::get();
-        return view('filetrack.file_user', compact('employees', 'roles'));
+        return view('filetrack.file_user', compact('employees', 'roles','depoffs'));
     }
 
     /**
@@ -47,14 +49,15 @@ class FileUserController extends Controller
      */
     public function store(Request $request)
     {
-        Log::info('request'.json_encode($request->all()));
+        // Log::info('request'.json_encode($request->all()));
         $request->validate([
             'first_name'=>'required',
             'last_name'=>'nullable',
             'phone'=>'nullable',
             'email'=>'required',
             'pic'=>'image|nullable',
-            'roleid' => 'required'
+            'roleid' => 'required',
+            'depoff'=>'required'
         ]);
         try
         {
@@ -71,6 +74,7 @@ class FileUserController extends Controller
                 'phone' => $request->phone,
                 'email' => $request->email,
                 'password' => $hashpassword,
+                'off_dep_id'=>$request->depoff,
                 'pic'=>'upload/fileuser/'.$fpic
             ];
             $role = Role::find($request->roleid);
@@ -137,7 +141,7 @@ class FileUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Log::info('update'.json_encode($request->all()));
+        // Log::info('update'.json_encode($request->all()));
         $request->validate([
             'first_name'=>'required',
             'last_name'=>'nullable',
@@ -159,7 +163,8 @@ class FileUserController extends Controller
             $data = [
                 'name' => $request->name,
                 'phone' => $request->phone,
-                'email' => $request->email
+                'email' => $request->email,
+                'off_dep_id'=>$request->depoff,
             ];
             $role = Role::find($request->roleid);
             $res= FileUser::find($id)->update($data);

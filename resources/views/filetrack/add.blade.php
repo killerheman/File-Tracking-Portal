@@ -49,7 +49,7 @@
                                             <div class="col-md-2">
                                                 <span>File Type</span>
                                             </div>
-                                            <div class="col-md-10">
+                                            <div class="col-md-5">
                                                 <div class="position-relative has-icon-left">
                                                     <div class="form-group">
                                                         <select data-placeholder="Select a type..." class="select2-icons form-control" id="type" name='type' @error('type') aria-invalid="true" @enderror required>
@@ -57,6 +57,26 @@
                                                                 <option {{isset($file)?"value=$file->file_type_id":"value=''"}}  data-icon="fa fa-wordpress"  selected hidden>{{$file->type->name??'--Select File Type --'}}</option>
                                                                @foreach ($types as $type)
                                                                    <option value="{{$type->id}}">{{strtoupper($type->name)}}</option>
+                                                               @endforeach
+
+
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-control-position">
+                                                        <i class="fa fa-book"></i>
+                                                    </div>
+
+                                                    @error('type') <div class="help-block"><ul role="alert"><li>{{$message}}</li></ul></div>@enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="position-relative has-icon-left">
+                                                    <div class="form-group">
+                                                        <select data-placeholder="Select a type..." class="select2-icons form-control" id="type_main" name='type_main' @error('type') aria-invalid="true" @enderror required>
+
+                                                                <option {{isset($file)?"value=$file->file_type_main_id":"value=''"}}  data-icon="fa fa-wordpress"  selected hidden>{{$file->file_type_main??'--Select File Type main --'}}</option>
+                                                               @foreach ($filetype2 as $type2)
+                                                                   <option value="{{$type2->id}}">{{strtoupper($type2->name)}}</option>
                                                                @endforeach
 
 

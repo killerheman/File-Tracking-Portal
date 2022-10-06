@@ -22,57 +22,86 @@
             <li class=" nav-item"><a href="{{ route('filetrack.dashboard') }}"><i class="feather icon-home"></i><span
                         class="menu-title" data-i18n="Dashboard">Dashboard</span></a>
             </li>
-
+            @can('File User')
             <li class=" nav-item"><a href="{{ route('filetrack.fileuser.index') }}"><i
                         class="feather icon-users"></i><span class="menu-title" data-i18n="Documentation">File
                         Users</span></a>
             </li>
-
+            @endcan
             <li class=" nav-item"><a href="#"><i class="fa fa-folder-open"></i><span class="menu-title"
                         data-i18n="Starter kit">File System</span></a>
                 <ul class="menu-content">
                     <ul class="menu-content">
-                        <li><a href="{{ route('filetrack.file-generate.index') }}"><i></i><span class="menu-item"
-                                    data-i18n="Roles">Generate New File</span></a>
-                        </li>
-                        <li><a href="{{ route('filetrack.generated-Files') }}"><i></i><span class="menu-item"
-                            data-i18n="Permissions">New Generated Files</span></a>
-                        </li>
-                        <li><a href="{{ route('filetrack.file-generate.create') }}"><i></i><span class="menu-item" data-i18n="Permissions">My Files</span></a>
-                        </li>
 
-                       
-                        <li><a href="{{ route('filetrack.arriving-files') }}"><i></i><span class="menu-item"
-                            data-i18n="Permissions">Arriving Files</span></a>
-                        </li>
+                        @can('All File')
+                            <li><a href="{{ route('filetrack.show-all') }}"><i></i><span class="menu-item"
+                                        data-i18n="Roles">All Files</span></a>
+                            </li>
+                        @endcan
+
+
+                        @canany(['All File_create', 'File_create'])
+                            <li><a href="{{ route('filetrack.file-generate.index') }}"><i></i><span class="menu-item"
+                                        data-i18n="Roles">Generate New File</span></a>
+                            </li>
+                        @endcanany
+
+                        @canany(['All File_edit', 'File_edit'])
+                            <li><a href="{{ route('filetrack.generated-Files') }}"><i></i><span class="menu-item"
+                                        data-i18n="Permissions">New Generated Files</span></a>
+                            </li>
+                        @endcanany
+                        @can(['File_read'])
+                            <li><a href="{{ route('filetrack.file-generate.create') }}"><i></i><span class="menu-item"
+                                        data-i18n="Permissions">My Files</span></a>
+                            </li>
+                        @endcan
+                        @can('File_edit')
+                            <li><a href="{{ route('filetrack.arriving-files') }}"><i></i><span class="menu-item"
+                                        data-i18n="Permissions">Arriving Files</span></a>
+                            </li>
+                            <li><a href="{{ route('filetrack.pending-files') }}"><i></i><span class="menu-item"
+                                        data-i18n="Permissions">Pending Files</span></a>
+                            </li>
+                        @endcan
+
                         <li><a href="{{ route('filetrack.pending-files') }}"><i></i><span class="menu-item"
-                            data-i18n="Permissions">Pending Files</span></a>
+                                    data-i18n="Permissions">Search Files</span></a>
                         </li>
                     </ul>
                 </ul>
             </li>
 
+            @can('Role Permission')
             <li class=" nav-item"><a href="#"><i class="feather icon-zap"></i><span class="menu-title"
-                data-i18n="Starter kit">Roles/Permissions</span></a>
-        <ul class="menu-content">
-            <ul class="menu-content">
-                <li><a href="{{ route('filetrack.role.index') }}"><i></i><span class="menu-item"
-                    data-i18n="Roles">Roles</span></a>
-                </li>
-                <li><a href="{{ route('filetrack.permission.index') }}"><i></i><span class="menu-item"
-                    data-i18n="Permissions">Permissions</span></a>
-                </li>
-                <li><a href="{{ route('filetrack.userPermission') }}"><i></i><span class="menu-item"
-                    data-i18n="Assign Permission">Assign Permission</span></a>
-                </li>
-                <li><a href="{{ route('filetrack.roleHasPermission') }}"><i></i><span class="menu-item"
-                    data-i18n="Role Has Permission">Role Has Permission</span></a>
-                </li>
-             
+                        data-i18n="Starter kit">Roles/Permissions</span></a>
+                <ul class="menu-content">
+                    <ul class="menu-content">
+                        @can('Role Permission_create')
+                        <li><a href="{{ route('filetrack.role.index') }}"><i></i><span class="menu-item"
+                            data-i18n="Roles">Roles</span></a>
+                        </li>
+                        @endcan
+                        @can('Role Permission_create')
+                        <li><a href="{{ route('filetrack.permission.index') }}"><i></i><span class="menu-item"
+                                    data-i18n="Permissions">Permissions</span></a>
+                        </li>
+                        @endcan
+                        @can('Role Permission_edit')
+                        <li><a href="{{ route('filetrack.userPermission') }}"><i></i><span class="menu-item"
+                                    data-i18n="Assign Permission">Assign Permission</span></a>
+                        </li>
+                        @endcan
+                        @can('Role Permission_edit')
+                        <li><a href="{{ route('filetrack.roleHasPermission') }}"><i></i><span class="menu-item"
+                                    data-i18n="Role Has Permission">Role Has Permission</span></a>
+                        </li>
+                        @endcan
 
-            </ul>
-        </ul>
-    </li>
+                    </ul>
+                </ul>
+            </li>
+            @endcan
         </ul>
     </div>
 </div>

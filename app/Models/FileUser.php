@@ -17,4 +17,9 @@ class FileUser extends Authenticatable
     {
         return $this->first_name. ' '. $this->last_name;
     }
+
+    public function OfficeDep()
+    {
+        return $this->belongsTo(OfficeDepartment::class,'off_dep_id');
+    }
 }

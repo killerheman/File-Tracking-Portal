@@ -47,7 +47,7 @@
                                     <span class="timeline-point timeline-point-indicator"></span>
                                     <div class="timeline-event">
                                         <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
-                                            <h6>{{$ft->mode->name}}</h6>
+                                            <h6>{{$ft->mode->name}} by/to {{$ft->userto->first_name}}</h6>
                                             <span class="timeline-event-time">{{$ft->created_at->diffForHumans()}}</span>
                                         </div>
                                         <p>{{$ft->description??'There is no any Description available'}}<br/>

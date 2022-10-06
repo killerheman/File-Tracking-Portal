@@ -10,6 +10,7 @@
 
 @section('content')
 
+@can('File User_create')
     <div class="card">
         <div class="card-header">
             <h3>
@@ -42,6 +43,16 @@
                         <input type="text" id="basic-addon-name" name='last_name' class="form-control"
                             value="{{ isset($editemployee) ? $editemployee->name : '' }}" placeholder="Enter last name"
                             aria-label="Name" aria-describedby="basic-addon-name" required />
+                    </div>
+                    <div class="col-md-6 mb-1">
+                        <label class="form-label" for="depoff">Department/Office</label>
+
+                        <select name="depoff" id="depoff" class="select2 form-control">
+                            <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Department Or Office--'}}</option>
+                            @foreach ($depoffs as $depoff)
+                                <option value="{{$depoff->id}}">{{$depoff->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-md-6 mb-1">
                         <label class="form-label" for="basic-addon-name">Phone</label>
@@ -91,7 +102,7 @@
             </form>
         </div>
     </div>
-
+@endcan
     <div class="card">
         <div class="card-header">
             <h3>Manage Users</h3>
@@ -106,6 +117,7 @@
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Role</th>
+                        <th>Dep/Office</th>
                         <th>Action</th>
 
                     </tr>
@@ -123,6 +135,7 @@
                             <td>{{ $employee->phone }}</td>
                             <td>{{ $employee->email }}</td>
                             <td>{{ $employee->roles[0]->name ?? '' }}</td>
+                            <td>{{ $employee->OfficeDep->sort_name ?? '' }}</td>
 
                             <td>
                                 <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">

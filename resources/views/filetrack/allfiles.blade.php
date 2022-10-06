@@ -13,7 +13,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Pending Files</h3>
+        <h3 class="card-title">All Files</h3>
     </div>
     <div class="card-body">
         <table class="table table-bordered">
@@ -34,7 +34,7 @@
                         <td>{{$file->type->name??''}}</td>
                         <td>{{$file->filestatus->name??''}}</td>
                         <td>{{$file->mode->name}}</td>
-                        @can('show_all_files') <td>{{$file->created_by_user->full_name}}</td> @endcan
+                        <td>{{$file->created_by_user->full_name}}</td> 
                         <td>{{$file->current_location->full_name}}</td>
                         <td>
                             <div class="dropdown">
@@ -49,7 +49,9 @@
                                     @if($file->mode->name=='generated')
                                     <a class="dropdown-item" href="#"> <i class="fa fa-trash text-danger"></i> Delete</a>
                                     @endif
-                                    <a class="dropdown-item transfer" href="javascript:void(0)" data-index="{{$file->id}}"> <i class="fa fa-share text-info"></i> Transfer</a>
+                                    @if($file->current_user==Auth::guard('fileuser')->user()->id || Auth::guard('fileuser')->user()->hasPermissionTo('Show_all_files_edit'))
+                                    <a class="dropdown-item transfer" href="#" data-index='{{$file->id}}' > <i class="fa fa-share-square-o text-info"></i>Transfer</a>
+                                    @endif
                                 </div>
                             </div>
                         </td>
@@ -68,7 +70,5 @@
 @section('script-area')
 <script src="{{asset('backend/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 <script src="{{asset('backend/app-assets/js/scripts/forms/select/form-select2.js')}}"></script>
-<script>
 
-</script>
 @endsection

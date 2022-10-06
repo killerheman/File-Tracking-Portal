@@ -51,26 +51,28 @@
                                         <tr>
                                             <td>{{$per->name}}</td>
                                             <td>
-                                                <div class="custom-control custom-checkbox ml-50"><input type="checkbox" id="users-checkbox2" class="custom-control-input" name="permissionckbx[]" value="{{$per->name}}" {{ !isset($editrole) ? '' : ($editrole->hasPermissionTo($per->name)?'checked':'') }}>
-                                                    <label class="custom-control-label" for="users-checkbox2"></label>
+                                                <div class="custom-control custom-checkbox ml-50"><input type="checkbox" id='{{$per->name}}' class="custom-control-input" name="permissionckbx[]" value="{{$per->name}}" {{ !isset($editrole) ? '' : ($editrole->hasPermissionTo($per->name)?'checked':'') }}>
+                                                    <label class="custom-control-label" for="{{$per->name}}"></label>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="custom-control custom-checkbox ml-50"><input type="checkbox" id="users-checkbox2" class="custom-control-input" name="permissionckbx[]" value="{{$per->name.'_read'}}" {{$per->name}}" {{$per->name}}" {{ !isset($editrole) ? '' : ($editrole->hasPermissionTo($per->name.'_read')?'checked':'') }} ><label class="custom-control-label" for="users-checkbox2"></label>
+                                                <div class="custom-control custom-checkbox ml-50"><input type="checkbox"  id="{{$per->name.'_read'}}" class="custom-control-input" name="permissionckbx[]" value="{{$per->name.'_read'}}"  {{ !isset($editrole) ? '' : ($editrole->hasPermissionTo($per->name.'_read')?'checked':'') }} >
+                                                    <label class="custom-control-label" for="{{$per->name.'_read'}}"></label>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="custom-control custom-checkbox ml-50"><input type="checkbox" id="users-checkbox3" name="permissionckbx[]" class="custom-control-input" value="{{$per->name.'_create'}}" {{$per->name.'_create'}}" {{$per->name}}" {{$per->name}}" {{ !isset($editrole) ? '' : ($editrole->hasPermissionTo($per->name.'_create')?'checked':'') }}><label class="custom-control-label" for="users-checkbox3"></label>
+                                                <div class="custom-control custom-checkbox ml-50"><input type="checkbox" name="permissionckbx[]" id="{{$per->name.'_create'}}" class="custom-control-input" value="{{$per->name.'_create'}}"  {{ !isset($editrole) ? '' : ($editrole->hasPermissionTo($per->name.'_create')?'checked':'') }}>
+                                                    <label class="custom-control-label" for="{{$per->name.'_create'}}"></label>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="custom-control custom-checkbox ml-50"><input type="checkbox" id="users-checkbox1" class="custom-control-input" name="permissionckbx[]" value="{{$per->name.'_edit'}}" {{ !isset($editrole) ? '' : ($editrole->hasPermissionTo($per->name.'_edit')?'checked':'') }}>
-                                                    <label class="custom-control-label" for="users-checkbox1"></label>
+                                                <div class="custom-control custom-checkbox ml-50"><input type="checkbox"  id="{{$per->name.'_edit'}}" class="custom-control-input" name="permissionckbx[]" value="{{$per->name.'_edit'}}" {{ !isset($editrole) ? '' : ($editrole->hasPermissionTo($per->name.'_edit')?'checked':'') }}>
+                                                    <label class="custom-control-label" for="{{$per->name.'_edit'}}"></label>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="custom-control custom-checkbox ml-50"><input type="checkbox" id="users-checkbox1" class="custom-control-input" name="permissionckbx[]" value="{{$per->name.'_delete'}}" {{ !isset($editrole) ? '' : ($editrole->hasPermissionTo($per->name.'_delete')?'checked':'') }}>
-                                                    <label class="custom-control-label" for="users-checkbox1"></label>
+                                                <div class="custom-control custom-checkbox ml-50"><input type="checkbox" id="{{$per->name.'_delete'}}" class="custom-control-input" name="permissionckbx[]" value="{{$per->name.'_delete'}}" {{ !isset($editrole) ? '' : ($editrole->hasPermissionTo($per->name.'_delete')?'checked':'') }}>
+                                                    <label class="custom-control-label" for="{{$per->name.'_delete'}}"></label>
                                                 </div>
                                             </td>
                                         </tr>
