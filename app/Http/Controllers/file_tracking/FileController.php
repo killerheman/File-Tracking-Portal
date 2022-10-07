@@ -29,7 +29,7 @@ class FileController extends Controller
     {
         $types=FileType::all();
         $status=FileStatus::all();
-        if(Auth::guard('fileuser')->user()->hasRole('Master File User'))
+        if(Auth::guard('fileuser')->user()->hasAnyRole(['Master File User','Admin','Super Admin']))
         {
              $filetype2=OfficeDepartment::all();
         }
@@ -47,14 +47,8 @@ class FileController extends Controller
      */
     public function create()
     {
-        if(Auth::guard('fileuser')->user()->hasPermissionTo('Show_all_files')){
-            $files=DocumentFile::paginate(10);
-            
-        }
-        else
-        {
             $files=DocumentFile::where('created_by',Auth::guard('fileuser')->user()->id)->paginate(10);
-        }
+        
 
         $users=FileUser::all()->except(Auth::guard('fileuser')->user()->id);
         $status=FileStatus::all();

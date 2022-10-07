@@ -44,13 +44,12 @@
                             <li><a href="{{ route('filetrack.file-generate.index') }}"><i></i><span class="menu-item"
                                         data-i18n="Roles">Generate New File</span></a>
                             </li>
+                            <li><a href="{{ route('filetrack.generated-Files') }}"><i></i><span class="menu-item"
+                                data-i18n="Permissions">New Generated Files</span></a>
+                             </li>
                         @endcanany
 
-                        @canany(['All File_edit', 'File_edit'])
-                            <li><a href="{{ route('filetrack.generated-Files') }}"><i></i><span class="menu-item"
-                                        data-i18n="Permissions">New Generated Files</span></a>
-                            </li>
-                        @endcanany
+                       
                         @can(['File_read'])
                             <li><a href="{{ route('filetrack.file-generate.create') }}"><i></i><span class="menu-item"
                                         data-i18n="Permissions">My Files</span></a>

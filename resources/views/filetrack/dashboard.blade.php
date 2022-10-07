@@ -40,6 +40,7 @@
 @section('content')
     <section id="dashboard-analytics">
         <div class="row">
+           @hasanyrole('Admin|Super Admin|Master File User|Mid File User')
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="card">
                     <div class="card-header d-flex flex-column align-items-start pb-0">
@@ -48,8 +49,8 @@
                                 <i class="fa fa-users fa-2x text-primary" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <h2 class="text-bold-700 mt-1 mb-25">5  </h2>
-                        <p class="mb-0">Generated Files</p>
+                        <h2 class="text-bold-700 mt-1 mb-25">{{$users}}</h2>
+                        <p class="mb-0">All Users</p>
                     </div>
                     <div class="card-content">
                         <div id="subscribe-gain-chart"></div>
@@ -64,8 +65,8 @@
                                 <i class="fa fa-snowflake-o fa-2x text-info" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <h2 class="text-bold-700 mt-1 mb-25"> 5 </h2>
-                        <p class="mb-0">Incoming Files</p>
+                        <h2 class="text-bold-700 mt-1 mb-25"> {{$todayfile}} </h2>
+                        <p class="mb-0">Today  Files</p>
                     </div>
                     <div class="card-content">
                         <div id="orders-received-chart"></div>
@@ -80,8 +81,8 @@
                                 <i class="fa fa-modx fa-2x text-success" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <h2 class="text-bold-700 mt-1 mb-25"> 3 </h2>
-                        <p class="mb-0">Recieved Files</p>
+                        <h2 class="text-bold-700 mt-1 mb-25"> {{$monthfile}} </h2>
+                        <p class="mb-0">This Month Files</p>
                     </div>
                     <div class="card-content">
                         <div id="subscribe-gain-chart"></div>
@@ -96,14 +97,18 @@
                                 <i class="fa fa-pie-chart fa-2x text-danger" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <h2 class="text-bold-700 mt-1 mb-25">34</h2>
-                        <p class="mb-0">Transfered Files</p>
+                        <h2 class="text-bold-700 mt-1 mb-25">{{$weekfile}}</h2>
+                        <p class="mb-0">This Week Files</p>
                     </div>
                     <div class="card-content">
                         <div id="orders-received-chart"></div>
                     </div>
                 </div>
             </div>
+          @endrole
+       
+           
+          
         </div>
     </section>
     <section id="overlay-image-chat-cards">
