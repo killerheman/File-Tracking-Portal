@@ -11,7 +11,7 @@
     <div class="row">
         @foreach ($role as $rl)
             <!--begin::Col-->
-            <div class="col-md-6" style="@if (count($role) < 4) style='width:400px !important' @endif">
+            <div class="col-md-4" style="@if (count($role) < 4) style='width:400px !important' @endif">
                 <!--begin::Card-->
                 <div class="card card-flush h-md-100"
                     style="@if (count($role) < 4) style='width:400px !important' @endif">

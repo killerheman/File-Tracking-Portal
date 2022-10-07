@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\file_tracking;
 
 use App\Http\Controllers\Controller;
+use App\Models\Error;
 use App\Models\PermissionName;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -45,15 +47,17 @@ class PermissionController extends Controller
         try
         {
             PermissionName::create(['name'=>$request->name]);
-            Permission::create(['name'=>$request->name]);
-            Permission::create(['name'=>$request->name.'_create']);
-            Permission::create(['name'=>$request->name.'_edit']);
-            Permission::create(['name'=>$request->name.'_delete']);
-            Permission::create(['name'=>$request->name.'_read']);
+            Permission::create(['name'=>$request->name, 'guard_name' => 'fileuser']);
+            Permission::create(['name'=>$request->name.'_create', 'guard_name' => 'fileuser']);
+            Permission::create(['name'=>$request->name.'_edit', 'guard_name' => 'fileuser']);
+            Permission::create(['name'=>$request->name.'_delete', 'guard_name' => 'fileuser']);
+            Permission::create(['name'=>$request->name.'_read', 'guard_name' => 'fileuser']);
             Session()->flash('success','Permission Added Successfully');
         }
         catch(Exception $ex)
         {
+            $url=URL::current();
+            Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
             Session()->flash('fail','Permission Not Added ');
         }
         return redirect()->back();
