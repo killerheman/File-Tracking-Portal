@@ -48,7 +48,7 @@
             <h3>Manage Permissions</h3>
         </div>
         <div class="card-body">
-            <table class="datatables-basic table datatable table-responsive">
+            <table class="datatables-basic table datatable">
                 <thead>
                     <tr>
                         <th>Sr.No</th>
