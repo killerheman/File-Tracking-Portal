@@ -2,6 +2,8 @@
 
 @section('title','Generate File')
 @push('head-area')
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="{{asset('backend/gtransapi.js')}}"></script>
 <link rel="stylesheet" type="text/css" href="{{asset('backend/app-assets/css/core/colors/palette-gradient.cs')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('backend/app-assets/vendors/css/forms/select/select2.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('backend/app-assets/css/plugins/forms/validation/form-validation.css')}}">
@@ -197,10 +199,28 @@
 </div>
 @endsection
 
-@push('script-area')
+@section('script-area')
+<script type="text/javascript" src="https://www.google.com/jsapi">
 <script src="{{asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js')}}"></script>
 <script src="{{asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
 <script src="{{asset('backend/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 <script src="{{asset('backend/app-assets/js/scripts/forms/select/form-select2.js')}}"></script>
+<script type="text/javascript">
+    google.load("elements", "1", { packages: "transliteration" });
+    var control;
+    function onLoad() {         
+        var options = {
+            //Source Language
+            sourceLanguage: google.elements.transliteration.LanguageCode.ENGLISH,
+            // Destination language to Transliterate
+            destinationLanguage: [google.elements.transliteration.LanguageCode.HINDI],
+            shortcutKey: 'ctrl+g',
+            transliterationEnabled: true
+        };                     
+        control = new google.elements.transliteration.TransliterationControl(options);  
+        control.makeTransliteratable(['description']);   
+    }
+    google.setOnLoadCallback(onLoad);         
+</script>
 
-@endpush
+@endsection

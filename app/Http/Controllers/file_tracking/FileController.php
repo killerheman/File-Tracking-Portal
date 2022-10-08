@@ -254,7 +254,7 @@ class FileController extends Controller
 
     public function showAllFiles()
     {
-        if(Auth::guard('fileuser')->user()->hasRole('Master File User')){
+        if(Auth::guard('fileuser')->user()->hasAnyRole('Master File User','Admin','Super Admin')){
             $files=DocumentFile::paginate(20);
         }
         else if(Auth::guard('fileuser')->user()->hasRole('Mid File User')){

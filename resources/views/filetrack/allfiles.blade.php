@@ -19,7 +19,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Sr.No</th><th>File Code</th><th>File Number</th><th>Barcode</th><th>QR</th><th>Subject</th><th>Type</th><Th>Status </Th><th>Mode</th> @can('Show_all_files') <th>Created By</th> @endcan <th>Current User</th><th>Action</th>
+                    <th>Sr.No</th><th>File Code</th><th>File Number</th><th>Barcode</th><th>QR</th><th>Subject</th><th>Type</th><Th>Status </Th><th>Mode</th><th>Created By</th> <th>Current User</th><th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,7 +49,7 @@
                                     @if($file->mode->name=='generated')
                                     <a class="dropdown-item" href="#"> <i class="fa fa-trash text-danger"></i> Delete</a>
                                     @endif
-                                    @if($file->current_user==Auth::guard('fileuser')->user()->id || Auth::guard('fileuser')->user()->hasPermissionTo('Show_all_files_edit'))
+                                    @if($file->current_user==Auth::guard('fileuser')->user()->id || Auth::guard('fileuser')->user()->hasPermissionTo('All File_edit'))
                                     <a class="dropdown-item transfer" href="#" data-index='{{$file->id}}' > <i class="fa fa-share-square-o text-info"></i>Transfer</a>
                                     @endif
                                 </div>
