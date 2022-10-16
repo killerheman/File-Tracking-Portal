@@ -51,45 +51,28 @@
                                             <div class="col-md-2">
                                                 <span>File Type</span>
                                             </div>
-                                            <div class="col-md-5">
-                                                <div class="position-relative has-icon-left">
-                                                    <div class="form-group">
-                                                        <select data-placeholder="Select a type..." class="select2-icons form-control" id="type" name='type' @error('type') aria-invalid="true" @enderror required>
-
-                                                                <option {{isset($file)?"value=$file->file_type_id":"value=''"}}  data-icon="fa fa-wordpress"  selected hidden>{{$file->type->name??'--Select File Type --'}}</option>
-                                                               @foreach ($types as $type)
-                                                                   <option value="{{$type->id}}">{{strtoupper($type->name)}}</option>
-                                                               @endforeach
-
-
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-control-position">
-                                                        <i class="fa fa-book"></i>
-                                                    </div>
-
-                                                    @error('type') <div class="help-block"><ul role="alert"><li>{{$message}}</li></ul></div>@enderror
-                                                </div>
+                                            <div class="col-md-4 mb-1">
+                                                <label class="form-label" for="depoff">Department/Office</label>
+                        
+                                                <select name="depoff" id="depoff" class="select2 form-control">
+                                                    <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Department Or Office--'}}</option>
+                                                    
+                                                    @foreach ($department as $depoff)
+                                                        <option value="{{$depoff->id}}">{{$depoff->name}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
-                                            <div class="col-md-5">
-                                                <div class="position-relative has-icon-left">
-                                                    <div class="form-group">
-                                                        <select data-placeholder="Select a type..." class="select2-icons form-control" id="type_main" name='type_main' @error('type') aria-invalid="true" @enderror required>
-
-                                                                <option {{isset($file)?"value=$file->file_type_main_id":"value=''"}}  data-icon="fa fa-wordpress"  selected hidden>{{$file->file_type_main??'--Select File Type main --'}}</option>
-                                                               @foreach ($filetype2 as $type2)
-                                                                   <option value="{{$type2->id}}">{{strtoupper($type2->name)}}</option>
-                                                               @endforeach
-
-
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-control-position">
-                                                        <i class="fa fa-book"></i>
-                                                    </div>
-
-                                                    @error('type') <div class="help-block"><ul role="alert"><li>{{$message}}</li></ul></div>@enderror
-                                                </div>
+                                            <div class="col-md-4 mb-1">
+                                                <label class="form-label" for="branch"> Branch</label>
+                        
+                                                <select name="branch" id="branch" class="select2 form-control">
+                                                    <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Branch--'}}</option>
+                                                  @isset($branch)
+                                                  @foreach ($branch as $br)
+                                                      <option value="{{$br->id}}">{{$br->name}}</option>
+                                                  @endforeach
+                                                  @endisset
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -222,5 +205,24 @@
     }
     google.setOnLoadCallback(onLoad);         
 </script>
-
+<script>
+        $(document).on('change','#depoff',function(){
+            var did=$(this).val();
+            var nurl="{{url('/filetracking')}}";
+           $.ajax({
+            url:nurl+'/get-branch',
+            method:'post',
+            data:{
+                "_token":"{{csrf_token()}}",
+                'dep_id':did
+            },
+            beforeSend:function(){
+                $('#branch').html('<option selected hidden>Fetching.........</option>');
+            },
+            success:function(p){
+                   $('#branch').html(p);
+            }
+           });
+        });
+    </script>
 @endsection

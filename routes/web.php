@@ -49,7 +49,8 @@ Route::group(['prefix'=>'filetracking','as'=>'filetrack.','middleware'=>'auth:fi
     Route::get('change-password',[FileUserController::class, 'changePassword'])->name('fileuser.changepassword');
     Route::post('update-profile',[FileUserController::class, 'updateProfile'])->name('fileuser.updateProfile');
     Route::post('update-password',[FileUserController::class, 'updatePassword'])->name('fileuser.updatePassword');
-
+    Route::post('get-branch',[FileUserController::class,'get_branch'])->name('get-branch');
+    Route::get('notification-read/{id}',[FileController::class,'notice_read'])->name('notification-read');
 
 });
 

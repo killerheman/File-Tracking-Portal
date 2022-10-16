@@ -44,14 +44,32 @@
                             value="{{ isset($editemployee) ? $editemployee->name : '' }}" placeholder="Enter last name"
                             aria-label="Name" aria-describedby="basic-addon-name" required />
                     </div>
-                    <div class="col-md-6 mb-1">
+                    <div class="col-md-4 mb-1">
                         <label class="form-label" for="depoff">Department/Office</label>
 
                         <select name="depoff" id="depoff" class="select2 form-control">
                             <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Department Or Office--'}}</option>
-                            @foreach ($depoffs as $depoff)
+                            @foreach ($department as $depoff)
                                 <option value="{{$depoff->id}}">{{$depoff->name}}</option>
                             @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-1">
+                        <label class="form-label" for="branch"> Branch</label>
+
+                        <select name="branch" id="branch" class="select2 form-control">
+                            <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Branch--'}}</option>
+                          
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-1">
+                        <label class="form-label" for="desigantion">Designation</label>
+
+                        <select name="desigantion" id="desigantion" class="select2 form-control">
+                            <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Branch--'}}</option>
+                          @foreach ($designation as $desi)
+                          <option value="{{$desi->id}}">{{$desi->name}}</option>
+                          @endforeach
                         </select>
                     </div>
                     <div class="col-md-6 mb-1">
@@ -118,6 +136,7 @@
                         <th>Email</th>
                         <th>Role</th>
                         <th>Dep/Office</th>
+                        <th>Branch</th>
                         <th>Action</th>
 
                     </tr>
@@ -136,6 +155,7 @@
                             <td>{{ $employee->email }}</td>
                             <td>{{ $employee->roles[0]->name ?? '' }}</td>
                             <td>{{ $employee->OfficeDep->sort_name ?? '' }}</td>
+                            <td>{{ $employee->branch->name??'' }}</td>
 
                             <td>
                                 <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
@@ -191,4 +211,24 @@
     <script src="{{ asset('backend/assets/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{asset('backend/assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
     <script src="{{asset('backend/assets/js/scripts/forms/form-select2.js')}}"></script>
+    <script>
+        $(document).on('change','#depoff',function(){
+            var did=$(this).val();
+            var nurl="{{url('/filetracking')}}";
+           $.ajax({
+            url:nurl+'/get-branch',
+            method:'post',
+            data:{
+                "_token":"{{csrf_token()}}",
+                'dep_id':did
+            },
+            beforeSend:function(){
+                $('#branch').html('<option selected hidden>Fetching.........</option>');
+            },
+            success:function(p){
+                   $('#branch').html(p);
+            }
+           });
+        });
+    </script>
 @endsection

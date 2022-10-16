@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\file_tracking;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branch;
+use App\Models\Department;
+use App\Models\Designation;
 use App\Models\Error;
 use App\Models\FileUser;
 use App\Models\OfficeDepartment;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -25,10 +29,21 @@ class FileUserController extends Controller
      */
     public function index()
     {
+        if(Auth::guard('fileuser')->user()->hasRole('Mid File User')){
+            
+        $roles = Role::whereNotIn('name',['Mid File User','Super Admin','Admin','Master File User'])->get();
+        $employees = FileUser::where('department_id',Auth::guard('fileuser')->user()->department_id)->get();
+        
+        $department=Department::where('id',Auth::guard('fileuser')->user()->department_id)->where('active',true)->get();
+        }
+        else if(Auth::guard('fileuser')->user()->hasAnyRole(['Master File User','Super Admin','Admin'])){
         $roles = Role::all();
-        $depoffs=OfficeDepartment::all();
         $employees = FileUser::get();
-        return view('filetrack.file_user', compact('employees', 'roles','depoffs'));
+        
+        $department=Department::where('active',true)->get();
+        }
+        $designation=Designation::where('active',true)->get();
+        return view('filetrack.file_user', compact('employees', 'roles','department','designation'));
     }
 
     /**
@@ -75,7 +90,10 @@ class FileUserController extends Controller
                 'email' => $request->email,
                 'password' => $hashpassword,
                 'off_dep_id'=>$request->depoff,
-                'pic'=>'upload/fileuser/'.$fpic
+                'pic'=>'upload/fileuser/'.$fpic,
+                'department_id'=>$request->depoff,
+                'branch_id'=>$request->branch,
+                'desigantion_id'=>$request->designation,
             ];
             $role = Role::find($request->roleid);
             $res= FileUser::create($data);
@@ -312,5 +330,15 @@ class FileUserController extends Controller
             Session::flash('error','Server Error ');
         }
             return redirect()->back();
+    }
+
+    public function get_branch(Request $req)
+    {
+        $branch = Branch::where('active',true)->where('department_id',$req->dep_id)->get();
+        $op='<option value="">--Select Branch--</option>';
+      foreach($branch as $b){
+        $op .='<option value="'.$b->id.'">'.$b->name.'</option>';
+      }
+      return $op;
     }
 }

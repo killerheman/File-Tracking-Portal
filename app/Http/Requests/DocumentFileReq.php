@@ -25,7 +25,7 @@ class DocumentFileReq extends FormRequest
     {
         return [
             'title'=>'required',
-            'type'=>'required',
+            // 'type'=>'required',
             'subject'=>'required',
             'fileno'=>'required|unique:document_files,file_number',
             'status'=>'required'

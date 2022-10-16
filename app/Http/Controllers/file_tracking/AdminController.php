@@ -47,7 +47,7 @@ class AdminController extends Controller
             $weekfile=DocumentFile::whereBetween('created_at', [Carbon::now()->startOfWeek(Carbon::SUNDAY), Carbon::now()->endOfWeek(Carbon::SATURDAY)])->count();
         }
         else if(Auth::guard('fileuser')->user()->hasRole('Mid File User')){
-            $users=FileUser::where('file_type_main_id',Auth::guard('fileuser')->user()->dep_off_id)->count();
+            $users=FileUser::where('department_id',Auth::guard('fileuser')->user()->department_id)->count();
             $todayfile=DocumentFile::where('file_type_main_id',Auth::guard('fileuser')->user()->dep_off_id)->where('created_at',Carbon::today())->count();
             $monthfile=DocumentFile::where('file_type_main_id',Auth::guard('fileuser')->user()->dep_off_id)->whereMonth('created_at',Carbon::now()->month)->count();
             $weekfile=DocumentFile::where('file_type_main_id',Auth::guard('fileuser')->user()->dep_off_id)->whereBetween('created_at', [Carbon::now()->startOfWeek(Carbon::SUNDAY), Carbon::now()->endOfWeek(Carbon::SATURDAY)])->count();
