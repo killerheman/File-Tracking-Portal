@@ -33,6 +33,8 @@ Route::group(['prefix'=>'filetracking','as'=>'filetrack.','middleware'=>'auth:fi
     Route::post('logout',[AdminController::class,'logout'])->name('logout');
     Route::resource('fileuser',FileUserController::class);
     Route::resource('file-generate',FileController::class);
+    Route::get('file-old',[FileController::class,'oldfile'])->name('add-old');
+    Route::post('file-old-save',[FileController::class,'storeold'])->name('storeold');
     Route::get('file-generate-showAll',[FileController::class,'showAllFiles'])->name('show-all');
     Route::get('generated-files',[FileController::class,'generatedFiles'])->name('generated-Files');
     Route::post('file-transfer',[FileController::class,'transfer_file'])->name('file-transfer');

@@ -44,9 +44,13 @@
                             <li><a href="{{ route('filetrack.file-generate.index') }}"><i></i><span class="menu-item"
                                         data-i18n="Roles">Generate New File</span></a>
                             </li>
+                            <li><a href="{{ route('filetrack.add-old') }}"><i></i><span class="menu-item"
+                                data-i18n="Roles">Add Old File</span></a>
+                            </li>
                             <li><a href="{{ route('filetrack.generated-Files') }}"><i></i><span class="menu-item"
                                 data-i18n="Permissions">New Generated Files</span></a>
                              </li>
+                             
                         @endcanany
 
                        

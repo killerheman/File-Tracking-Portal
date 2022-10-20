@@ -283,4 +283,57 @@ if($notification) {
 }
 return redirect()->back();
     }
+
+    public function oldfile(){
+        $status=FileStatus::all();
+        if(Auth::guard('fileuser')->user()->hasAnyRole(['Master File User','Admin','Super Admin']))
+        {
+             $department=Department::where('active',true)->get();
+             return view('filetrack.oldadd',compact('status','department'));
+        }
+        else if(Auth::guard('fileuser')->user()->hasRole('Mid File User')){
+            $department=Department::where('id',Auth::guard('fileuser')->user()->department_id)->get();
+            $branch=Branch::where('active',true)->where('department_id',Auth::guard('fileuser')->user()->department_id)->get();
+            return view('filetrack.oldadd',compact('status','branch','department'));
+        }
+        
+    }
+
+    public function storeold(DocumentFileReq $req)
+    {
+        $res=DocumentFile::create([
+            'title'=>$req->title,
+            'file_code'=>$req->filecode,
+            'file_number'=>$req->fileno,
+            'file_type_id'=>$req->depoff,
+            'file_type_main_id'=>$req->branch,
+            'subject'=>$req->subject,
+            'description'=>$req->description,
+            'file_mode_id'=>FileMode::where('name','generated')->first()->id,
+            'status'=>$req->status,
+            'created_by'=>Auth::guard('fileuser')->user()->id,
+            'current_user'=>Auth::guard('fileuser')->user()->id,
+        ]);
+       // return $res;
+        if($res){
+
+            FileTracking::create([
+                'file_id'=>$res->id,
+                'sender_id'=>Auth::guard('fileuser')->user()->id,
+                'mode_id'=>FileMode::where('name','generated')->first()->id,
+                'status'=>$req->status,
+                'remark'=>'File Generated'
+            ]);
+            Session::flash('info','File Generated <br/> <b>File Code - </b>'.$res->file_code);
+       Auth::user()->notify(new NewFile($res));
+
+            
+        }
+        else
+        {
+            Session::flash('error','Something went wrong Please try again ');
+        }
+        return redirect()->back();
+    }
+
 }
