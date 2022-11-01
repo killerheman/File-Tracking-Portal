@@ -49,7 +49,7 @@ a.btn.disabled, .fc a.disabled.fc-button, fieldset:disabled a.btn, fieldset:disa
 .btn-primary:hover {
   color : #FFFFFF;
   background-color : #5344ED;
-  border-color : #4839EB;
+  border-color : #00aeef;
 }
 .btn-primary:focus, .btn-primary.focus {
   box-shadow : 0 0 0 0.2rem rgba(136, 126, 242, 0.5);
@@ -61,7 +61,7 @@ a.btn.disabled, .fc a.disabled.fc-button, fieldset:disabled a.btn, fieldset:disa
 }
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
   color : #FFFFFF;
-  background-color : #4839EB;
+  background-color : #00aeef;
   border-color : #3E2DEA;
 }
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
@@ -623,7 +623,7 @@ input[type='submit'].btn-block, input[type='reset'].btn-block, input[type='butto
   color : #FFFFFF;
 }
 .fc .fc-button:not(:disabled).fc-button-active {
-  background-color : #4839EB;
+  background-color : #00aeef;
 }
 .fc .fc-button:focus {
   outline : none;

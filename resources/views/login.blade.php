@@ -9,9 +9,9 @@
     <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Login</title>
-    <link rel="apple-touch-icon" href="{{asset('backend/app-assets/images/ico/apple-icon-120.png')}}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('backend/app-assets/images/ico/favicon.ico')}}">
+    <title>LNMU : File-Tracking Login</title>
+    <link rel="apple-touch-icon" href="{{asset('backend/app-assets/images/logo/logo.jpg')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('backend/app-assets/images/logo/logo.jpg')}}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -53,6 +53,9 @@
                 <section class="row flexbox-container">
                     <div class="col-xl-8 col-11 d-flex justify-content-center">
                         <div class="card bg-authentication rounded-0 mb-0">
+                            {{-- <div class="row">
+                                <img src="{{ asset('backend/app-assets/images/logo/newlnmu.gif') }}" height="100" width="100" />
+                            </div> --}}
                             <div class="row m-5">
                                 <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
                                     <img src="{{asset('backend/app-assets/images/pages/file-tracking-login.jpg')}}" alt="branding logo">
@@ -61,23 +64,24 @@
                                     <div class="card rounded-0 mb-0 px-2">
                                         <div class="card-header pb-1">
                                             <div class="card-title">
-                                                <h4 class="mb-0">Login</h4>
+                                                <h4 class="mb-0">LNMU File-Tracking Login</h4>
                                             </div>
                                         </div>
                                         <p class="px-2">Welcome back, please login to your account.</p>
                                         <div class="card-content mb-2">
                                             <div class="card-body pt-1">
-                                                <form action="index.html">
+                                                <form action="{{ route('login') }}" method="post">
+                                                    @csrf
                                                     <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                                        <input type="text" class="form-control" id="user-name" placeholder="Username" required>
+                                                        <input type="email" class="form-control" name="email" id="user-name" placeholder="Email" required>
                                                         <div class="form-control-position">
                                                             <i class="feather icon-user"></i>
                                                         </div>
-                                                        <label for="user-name">Username</label>
+                                                        <label for="user-name">Email</label>
                                                     </fieldset>
 
                                                     <fieldset class="form-label-group position-relative has-icon-left">
-                                                        <input type="password" class="form-control" id="user-password" placeholder="Password" required>
+                                                        <input type="password" class="form-control" name="password" id="user-password" placeholder="Password" required>
                                                         <div class="form-control-position">
                                                             <i class="feather icon-lock"></i>
                                                         </div>
@@ -87,7 +91,7 @@
                                                         <div class="text-left">
                                                             <fieldset class="checkbox">
                                                                 <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                    <input type="checkbox">
+                                                                    <input type="checkbox" name="remember_me">
                                                                     <span class="vs-checkbox">
                                                                         <span class="vs-checkbox--check">
                                                                             <i class="vs-icon feather icon-check"></i>

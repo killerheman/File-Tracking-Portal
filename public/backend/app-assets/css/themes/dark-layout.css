@@ -368,7 +368,7 @@ body.dark-layout .search-bar .form-control {
   background-color : #10163A;
 }
 body.dark-layout .btn-white ~ .dropdown-menu .dropdown-item:not(.acitve):hover {
-  color : #7367F0 !important;
+  color : #7C0000!important;
 }
 body.dark-layout .btn-dark ~ .dropdown-menu .dropdown-item:hover, body.dark-layout .btn-outline-dark ~ .dropdown-menu .dropdown-item:hover, body.dark-layout .btn-flat-dark ~ .dropdown-menu .dropdown-item:hover {
   color : #C2C6DC;

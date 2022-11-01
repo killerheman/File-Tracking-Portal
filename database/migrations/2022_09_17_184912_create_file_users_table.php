@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('phone')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
+            $table->string('pic')->nullable();
+            $table->bigInteger('off_dep_id')->nullable()->comment='Relation from Office Department';
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

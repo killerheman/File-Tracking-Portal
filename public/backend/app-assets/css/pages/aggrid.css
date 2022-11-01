@@ -11,7 +11,7 @@
   /*** TABLE SCROLLBAR ***/
 }
 .aggrid .ag-icon-checkbox-checked, .aggrid .ag-icon-checkbox-indeterminate {
-  color : #7367F0 !important;
+  color : #7C0000!important;
 }
 .aggrid .ag-root-wrapper-body {
   min-height : calc(100% - 56px);

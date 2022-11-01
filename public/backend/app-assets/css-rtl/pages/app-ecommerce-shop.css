@@ -129,10 +129,10 @@
   font-size : 1.7rem;
 }
 .ecommerce-application .ecommerce-header-items .view-options .view-btn-option .btn.view-btn.active {
-  color : #7367F0 !important;
+  color : #7C0000!important;
 }
 .ecommerce-application .ecommerce-header-items .view-options .view-btn-option .btn.view-btn.active:hover, .ecommerce-application .ecommerce-header-items .view-options .view-btn-option .btn.view-btn.active:active {
-  color : #7367F0 !important;
+  color : #7C0000!important;
 }
 .ecommerce-application .ecommerce-header-items .view-options .view-btn-option .btn.view-btn:hover, .ecommerce-application .ecommerce-header-items .view-options .view-btn-option .btn.view-btn:active {
   color : #626262;
