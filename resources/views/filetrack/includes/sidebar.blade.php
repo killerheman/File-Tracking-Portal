@@ -4,7 +4,7 @@
             <li class="nav-item mr-auto">
                 <a class="navbar-brand" href="#">
                     <img class="" alt="logo" height="50" width="50"
-                        src="{{ asset('backend/app-assets/images/logo/newlnmu.gif') }}">
+                        src="{{ asset('backend/app-assets/images/logo/logo.jpg') }}">
                     <h2 class="brand-text" style="color: #7C0000;">FileTracking</h2>
                     {{-- <h2 class="brand-text mb-0">LNMU</h2> --}}
                 </a>
@@ -53,7 +53,7 @@
                              
                         @endcanany
 
-                       
+
                         @can(['File_read'])
                             <li><a href="{{ route('filetrack.file-generate.create') }}"><i></i><span class="menu-item"
                                         data-i18n="Permissions">My Files</span></a>
