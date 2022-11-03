@@ -57,7 +57,7 @@
 
                         <input type="email" id="basic-addon-name" name='email' class="form-control"
                             value="{{ Auth::guard('fileuser')->user()->email }}" placeholder="Email"
-                            aria-label="Name" aria-describedby="basic-addon-name" required />
+                            aria-label="Name" aria-describedby="basic-addon-name" readonly />
                     </div>
 
                     <div class="col-md-6 mb-1">
