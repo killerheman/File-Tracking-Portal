@@ -63,7 +63,7 @@
                                                     <td>{{ $loop->index+1 }}</td>
                                                     <td>{{ Carbon\Carbon::parse($ft->created_at)->format('d-M-Y') }}</td>
                                                     <td>{{ $ft->id.'/'.Carbon\Carbon::parse($ft->created_at)->format('y') }}</td>
-                                                    <td>{{$ft->transfer_by->full_name??''}} / {{$ft->transfer_by->OfficeDep->name}}</td>
+                                                    <td>{{$ft->transfer_by->full_name??''}} / {{$ft->transfer_by->OfficeDep->name??''}}</td>
                                                     <td>{{$ft->remark}}</td>
                                                     <td>{{$ft->userto->full_name}}</td>
                                                     <td>{{$ft->mode->name}}</td>
