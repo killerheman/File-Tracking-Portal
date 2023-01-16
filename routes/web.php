@@ -8,6 +8,8 @@ use App\Http\Controllers\file_tracking\RoleController;
 use App\Models\FileUser;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,3 +75,7 @@ Route::get('/assign', function(){
 
 });
 Route::post('/file-store',[FileController::class,'store'])->name('file-store');
+// Route::get('assign',function(){
+//     $role=Role::first();
+//     $role->givePermissionTo(Permission::all());
+// });
