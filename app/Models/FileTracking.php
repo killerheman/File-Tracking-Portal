@@ -41,6 +41,6 @@ class FileTracking extends Model
 
     public function transfer_by()
     {
-        return $this->belongsTo(FileUser::class,'transfer_by');
+        return $this->belongsTo(FileUser::class,'sender_id');
     }
 }

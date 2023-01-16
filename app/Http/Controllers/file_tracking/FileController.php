@@ -42,7 +42,7 @@ class FileController extends Controller
             $branch=Branch::where('active',true)->where('department_id',Auth::guard('fileuser')->user()->department_id)->get();
             return view('filetrack.add',compact('status','branch','department'));
         }
-        
+
     }
 
     /**
@@ -52,9 +52,7 @@ class FileController extends Controller
      */
     public function create()
     {
-            $files=DocumentFile::where('created_by',Auth::guard('fileuser')->user()->id)->paginate(10);
-        
-
+        $files=DocumentFile::where('created_by',Auth::guard('fileuser')->user()->id)->paginate(10);
         $users=FileUser::all()->except(Auth::guard('fileuser')->user()->id);
         $status=FileStatus::all();
         return view('filetrack.showfiles',compact('files','users','status'));
@@ -94,7 +92,7 @@ class FileController extends Controller
             Session::flash('info','File Generated <br/> <b>File Code - </b>'.$res->file_code);
        Auth::user()->notify(new NewFile($res));
 
-            
+
         }
         else
         {
@@ -145,7 +143,7 @@ class FileController extends Controller
                 'subject'=>'required',
                 'fileno'=>'required|unique:document_files,file_number,'.Crypt::decrypt($id),
                 'status'=>'required'
-            
+
         ]);
         $res=DocumentFile::find(Crypt::decrypt($id))->update([
             'title'=>$req->title,
@@ -156,7 +154,7 @@ class FileController extends Controller
         ]);
         if($res){
             Session::flash('info','File Updated');
-            
+
         }
         else
         {
@@ -178,7 +176,7 @@ class FileController extends Controller
 
     public function generatedFiles()
     {
-        
+
             $files=DocumentFile::where('created_by',Auth::guard('fileuser')->user()->id)->where('file_mode_id',FileMode::where('name','generated')->first()->id)->paginate(10);
 
 
@@ -252,7 +250,7 @@ class FileController extends Controller
             }
         }
         return redirect()->back();
-       
+
     }
 
     public function file_search()
@@ -262,7 +260,7 @@ class FileController extends Controller
 
     public function showAllFiles()
     {
-        
+
         if(Auth::guard('fileuser')->user()->hasAnyRole('Master File User','Admin','Super Admin')){
             $files=DocumentFile::paginate(20);
         }
@@ -278,10 +276,10 @@ class FileController extends Controller
     public function notice_read($id)
     {
         $notification = Auth::guard('fileuser')->user()->notifications()->find($id);
-if($notification) {
-    $notification->markAsRead();
-}
-return redirect()->back();
+        if($notification) {
+            $notification->markAsRead();
+        }
+        return redirect()->back();
     }
 
     public function oldfile(){
@@ -296,7 +294,7 @@ return redirect()->back();
             $branch=Branch::where('active',true)->where('department_id',Auth::guard('fileuser')->user()->department_id)->get();
             return view('filetrack.oldadd',compact('status','branch','department'));
         }
-        
+
     }
 
     public function storeold(DocumentFileReq $req)
@@ -327,13 +325,20 @@ return redirect()->back();
             Session::flash('info','File Generated <br/> <b>File Code - </b>'.$res->file_code);
        Auth::user()->notify(new NewFile($res));
 
-            
+
         }
         else
         {
             Session::flash('error','Something went wrong Please try again ');
         }
         return redirect()->back();
+    }
+
+    public function trackingFile($id)
+    {
+        $file=DocumentFile::find(crypt::decrypt($id));
+        // dd($file);
+        return view('filetrack.track_file',compact('file'));
     }
 
 }

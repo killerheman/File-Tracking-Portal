@@ -38,7 +38,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Basic</h4>
+                            <h4 class="card-title">Track</h4>
                         </div>
                         <div class="card-body">
                             <ul class="timeline">
@@ -58,14 +58,14 @@
                                             <span>invoice.pdf</span> --}}
                                         </div>
                                     </div>
-                                </li> 
+                                </li>
                                 @endforeach
-                                
+
                             </ul>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </section>
         <!-- Timeline Ends -->
