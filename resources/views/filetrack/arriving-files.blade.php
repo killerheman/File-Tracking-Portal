@@ -45,7 +45,7 @@
                                     @if($file->mode->name=='generated')
                                     <a class="dropdown-item" href="{{route('filetrack.file-generate.edit',Crypt::encrypt($file->id))}}"> <i class="fa fa-pencil-square-o text-warning"></i> Edit</a>
                                     @endif
-                                    <a class="dropdown-item" href="{{route('filetrack.file-generate.show',Crypt::encrypt($file->id))}}"> <i class="fa fa-eye text-primary"></i> View</a>
+                                    <a class="dropdown-item" href="{{route('filetrack.trackingFile',Crypt::encrypt($file->id))}}"> <i class="fa fa-eye text-primary"></i> View</a>
                                     @if($file->mode->name=='generated')
                                     <a class="dropdown-item" href="#"> <i class="fa fa-trash text-danger"></i> Delete</a>
                                     @endif

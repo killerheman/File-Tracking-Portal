@@ -68,7 +68,7 @@
                             </li>
                         @endcan
 
-                        <li><a href="{{ route('filetrack.pending-files') }}"><i></i><span class="menu-item"
+                        <li><a href="{{ route('filetrack.file-search') }}"><i></i><span class="menu-item"
                                     data-i18n="Permissions">Search Files</span></a>
                         </li>
                     </ul>
