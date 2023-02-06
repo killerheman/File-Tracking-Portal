@@ -14,6 +14,7 @@ use App\Models\FileTracking;
 use App\Models\FileType;
 use App\Models\FileUser;
 use App\Models\OfficeDepartment;
+use App\Models\OldFile;
 use Database\Seeders\filemode as SeedersFilemode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -287,41 +288,58 @@ class FileController extends Controller
         if(Auth::guard('fileuser')->user()->hasAnyRole(['Master File User','Admin','Super Admin']))
         {
              $department=Department::where('active',true)->get();
-             return view('filetrack.oldadd',compact('status','department'));
+             $files = OldFile::latest()->get();
+             return view('filetrack.oldadd',compact('status','department','files'));
         }
         else if(Auth::guard('fileuser')->user()->hasRole('Mid File User')){
             $department=Department::where('id',Auth::guard('fileuser')->user()->department_id)->get();
             $branch=Branch::where('active',true)->where('department_id',Auth::guard('fileuser')->user()->department_id)->get();
-            return view('filetrack.oldadd',compact('status','branch','department'));
+            $files = OldFile::latest()->get();
+            return view('filetrack.oldadd',compact('status','branch','department','files'));
         }
 
     }
 
-    public function storeold(DocumentFileReq $req)
+    public function storeold(Request $req)
     {
-        $res=DocumentFile::create([
-            'title'=>$req->title,
+        $req->validate([
+            'fileno'=>'required',
+            'filecode'=>'required',
+            'inidepoff'=>'required',
+            'inibranch'=>'required',
+            'senderdepoff'=>'required',
+            'senderbranch'=>'required',
+            'subject'=>'required',
+            'description'=>'nullable',
+            'file_receiving_date'=>'required|date',
+            'file_approval_date'=>'required|date',
+            'remark'=>'nullable',
+            'file'=>'nullable',
+            'status'=>'nullable'
+        ]);
+        $file = '';
+        if($req->hasFile('file')){
+            $file = 'oldfile-' .$req->fileno. '.' . $req->file->extension();
+            $req->file->move(public_path('upload/oldfile'),$file);
+        }
+        $res=OldFile::create([
+            'file_no'=>$req->fileno,
             'file_code'=>$req->filecode,
-            'file_number'=>$req->fileno,
-            'file_type_id'=>$req->depoff,
-            'file_type_main_id'=>$req->branch,
+            'ini_department'=>$req->inidepoff,
+            'ini_branch'=>$req->inibranch,
+            'sender_department'=>$req->senderdepoff,
+            'sender_branch'=>$req->senderbranch,
             'subject'=>$req->subject,
-            'description'=>$req->description,
-            'file_mode_id'=>FileMode::where('name','generated')->first()->id,
+            'matter'=>$req->description,
+            'receiving_date'=>$req->file_receiving_date,
+            'approval_date'=>$req->file_approval_date,
+            'file'=>'upload/oldfile/'.$file,
+            'remark'=>$req->remark,
             'status'=>$req->status,
             'created_by'=>Auth::guard('fileuser')->user()->id,
-            'current_user'=>Auth::guard('fileuser')->user()->id,
         ]);
        // return $res;
         if($res){
-
-            FileTracking::create([
-                'file_id'=>$res->id,
-                'sender_id'=>Auth::guard('fileuser')->user()->id,
-                'mode_id'=>FileMode::where('name','generated')->first()->id,
-                'status'=>$req->status,
-                'remark'=>'File Generated'
-            ]);
             Session::flash('info','File Generated <br/> <b>File Code - </b>'.$res->file_code);
        Auth::user()->notify(new NewFile($res));
 

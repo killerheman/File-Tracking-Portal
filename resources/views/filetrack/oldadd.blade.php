@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('backend/app-assets/css/core/colors/palette-gradient.cs')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('backend/app-assets/vendors/css/forms/select/select2.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('backend/app-assets/css/plugins/forms/validation/form-validation.css')}}">
+
 @endpush
 @section('content')
 
@@ -23,101 +24,13 @@
 
                 <div class="card-content">
                     <div class="card-body">
-                        <form class="form form-horizontal"  method="post" action="{{isset($file)?route('filetrack.file-generate.update',Crypt::encrypt($file->id)):route('filetrack.storeold')}}">
+                        <form class="form form-horizontal"  method="post" action="{{isset($file)?route('filetrack.file-generate.update',Crypt::encrypt($file->id)):route('filetrack.storeold')}}" enctype="multipart/form-data">
                             @isset($file)
                                 @method('PATCH')
                             @endisset
                             @csrf
                             <div class="form-body">
                                 <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group row">
-                                            <div class="col-md-2">
-                                                <span>File Title</span>
-                                            </div>
-                                            <div class="col-md-10">
-                                                <div class="position-relative has-icon-left">
-                                                    <input type="text" id="title" class="form-control" name="title" placeholder="File Title" value="{{$file->title??''}}" @error('title') aria-invalid="true" @enderror required>
-                                                    <div class="form-control-position">
-                                                        <i class="fa fa-file-o"></i>
-                                                    </div>
-                                                    @error('title') <div class="help-block"><ul role="alert"><li>{{$message}}</li></ul></div>@enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group row">
-                                            <div class="col-md-2">
-                                                <span>File Type</span>
-                                            </div>
-                                            <div class="col-md-3 mb-1">
-                                                <label class="form-label" for="depoff">Department/Office</label>
-                        
-                                                <select name="depoff" id="depoff" class="select2 form-control">
-                                                    <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Department Or Office--'}}</option>
-                                                    
-                                                    @foreach ($department as $depoff)
-                                                        <option value="{{$depoff->id}}">{{$depoff->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3 mb-1">
-                                                <label class="form-label" for="branch"> Branch</label>
-                        
-                                                <select name="branch" id="branch" class="select2 form-control">
-                                                    <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Branch--'}}</option>
-                                                  @isset($branch)
-                                                  @foreach ($branch as $br)
-                                                      <option value="{{$br->id}}">{{$br->name}}</option>
-                                                  @endforeach
-                                                  @endisset
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3 mb-1">
-                                                <label class="form-label" for="filecode"> File Code</label>
-                        
-                                                <input type="text" class="form-control" name='filecode' required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group row">
-                                            <div class="col-md-2">
-                                                <span>subject</span>
-                                            </div>
-                                            <div class="col-md-10">
-                                                <div class="position-relative has-icon-left">
-                                                    <input type="text" id="subject" value="{{isset($file)?$file->subject:''}}" class="form-control" placeholder="Subject" name='subject' @error('subject') aria-invalid="true" @enderror  required >
-                                                    <div class="form-control-position">
-                                                        <i class="fa fa-envelope"></i>
-                                                    </div>
-                                                </div>
-                                                @error('subject') <div class="help-block"><ul role="alert"><li>{{$message}}</li></ul></div>@enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group row">
-                                            <div class="col-md-2">
-                                                <span>Description</span>
-                                            </div>
-                                            <div class="col-md-10">
-                                                <div class="position-relative has-icon-left">
-                                                    <fieldset class="form-label-group mb-0">
-                                                        <textarea data-length=500 class="form-control char-textarea" id="description" rows="3" name='description' placeholder="description">
-                                                            {{isset($file)?$file->description:''}}
-                                                        </textarea>
-                                                        <label for="textarea-counter">Description</label>
-                                                    </fieldset>
-                                                    <small class="counter-value float-right"><span class="char-count">0</span> / 500 </small>
-                                                    <div class="form-control-position">
-                                                        <i class="feather icon-lock"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="col-12">
                                         <div class="form-group row">
                                             <div class="col-md-2">
@@ -138,6 +51,166 @@
                                                 <div class="">{!! DNS1D::getBarcodeHTML($code, 'UPCA') !!}</div>
 
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 mb-1">
+                                        <label class="form-label" for="filecode"> File Code</label>
+                                    </div>
+                                    <div class="col-8 mb-1">
+                                        <input type="text" class="form-control" name='filecode' required>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-2 mb-1">
+                                                <span>Initiating/Relating Department</span>
+                                            </div>
+                                            <div class="col-md-3 mb-1">
+                                                <label class="form-label" for="inidepoff">Department/Office</label>
+                        
+                                                <select name="inidepoff" id="inidepoff" class="select2 form-control">
+                                                    <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Department Or Office--'}}</option>
+                                                    
+                                                    @foreach ($department as $depoff)
+                                                        <option value="{{$depoff->id}}">{{$depoff->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3 mb-1">
+                                                <label class="form-label" for="inibranch">Branch</label>
+                        
+                                                <select name="inibranch" id="inibranch" class="select2 form-control">
+                                                    <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Branch--'}}</option>
+                                                  @isset($branch)
+                                                  @foreach ($branch as $br)
+                                                      <option value="{{$br->id}}">{{$br->name}}</option>
+                                                  @endforeach
+                                                  @endisset
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-2 mb-1">
+                                                <span>File Receive From</span>
+                                            </div>
+                                            <div class="col-md-3 mb-1">
+                                                <label class="form-label" for="senderdepoff">Department/Office</label>
+                        
+                                                <select name="senderdepoff" id="senderdepoff" class="select2 form-control">
+                                                    <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Department Or Office--'}}</option>
+                                                    
+                                                    @foreach ($department as $depoff)
+                                                        <option value="{{$depoff->id}}">{{$depoff->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3 mb-1">
+                                                <label class="form-label" for="senderbranch">File Receive from</label>
+                        
+                                                <select name="senderbranch" id="senderbranch" class="select2 form-control">
+                                                    <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Branch--'}}</option>
+                                                  @isset($branch)
+                                                  @foreach ($branch as $br)
+                                                      <option value="{{$br->id}}">{{$br->name}}</option>
+                                                  @endforeach
+                                                  @endisset
+                                                </select>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-2">
+                                                <span>Subject</span>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="position-relative has-icon-left">
+                                                    <input type="text" id="subject" value="{{isset($file)?$file->subject:''}}" class="form-control" placeholder="Subject" name='subject' @error('subject') aria-invalid="true" @enderror  required >
+                                                    <div class="form-control-position">
+                                                        <i class="fa fa-envelope"></i>
+                                                    </div>
+                                                </div>
+                                                @error('subject') <div class="help-block"><ul role="alert"><li>{{$message}}</li></ul></div>@enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-2">
+                                                <span>Matter/Summary Of file</span>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="position-relative has-icon-left">
+                                                    <fieldset class="form-label-group mb-0">
+                                                        <textarea data-length=500 class="form-control char-textarea" id="description" rows="3" name='description' placeholder="description">
+                                                            {{isset($file)?$file->description:''}}
+                                                        </textarea>
+                                                        <label for="textarea-counter">Matter/Summary Of file</label>
+                                                    </fieldset>
+                                                    <small class="counter-value float-right"><span class="char-count">0</span> / 500 </small>
+                                                    <div class="form-control-position">
+                                                        <i class="feather icon-lock"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-2">
+                                                <span>File Receiving Date</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="position-relative has-icon-left">
+                                                   
+                                                    <input type="date" id="date" class="form-control" name="file_receiving_date" placeholder="File Receiving Date">
+                                                    <div class="form-control-position">
+                                                        <i class="fa fa-database"></i>
+                                                    </div>
+
+                                                </div>
+                                            </div>   
+                                            <div class="col-2">
+                                                <span>Date of approval</span>
+                                            </div>
+                                           <div class="col-4">
+                                            <div class="position-relative has-icon-left">
+                                                   
+                                                <input type="date" id="date" class="form-control" name="file_approval_date" placeholder="File Receiving Date">
+                                                <div class="form-control-position">
+                                                    <i class="fa fa-database"></i>
+                                                </div>
+
+                                            </div>       
+                                        </div>                                 
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-2">
+                                               <span>Remark</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                               
+                                                <input type="text" name="remark" class="form-control" id="">
+
+                                                </div>
+                                                <div class="col-md-2">
+                                                    Upload <span class="text-info"> (scan copy of approval)</span>
+                                                   
+                                                </div> 
+                                                <div class="col-md-4">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input"  name='file' id="inputGroupFile01">
+                                                        <label class="custom-file-label" for="inputGroupFile01">scan copy of approval</label>
+                                                    </div>
+                                                </div>   
+                                            </div>
+                                            
+                                            
+                                                                             
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -185,6 +258,42 @@
     </div>
 
 </div>
+
+<div class="card">
+    <div class="card-header">
+        All Old Files
+    </div>
+    <div class="card-body">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Sr No</th>
+                    <th>File Code</th>
+                    <th>Initiating/Relating Department</th>
+                    <th>File Receive From</th>
+                    <th>Subject</th>
+                    <th>File Receiving Date</th>
+                    <th>Date of approval</th>
+                    <th>File</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($files as $file)
+                <tr>
+                    <td>{{++$loop->index}}</td>
+                    <td>{{$file->file_code}}</td>
+                    <td>{{$file->initiating->name}}</td>
+                    <td>{{$file->sender->name}}</td>
+                    <td>{{$file->subject}}</td>
+                    <td>{{$file->receiving_date}}</td>
+                    <td>{{$file->approval_date}}</td>
+                    <td><a href="{{asset($file->file)}}" target="_blank">view</a></td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
 @endsection
 
 @section('script-area')
@@ -193,6 +302,7 @@
 <script src="{{asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
 <script src="{{asset('backend/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 <script src="{{asset('backend/app-assets/js/scripts/forms/select/form-select2.js')}}"></script>
+
 <script type="text/javascript">
     google.load("elements", "1", { packages: "transliteration" });
     var control;
@@ -211,7 +321,7 @@
     google.setOnLoadCallback(onLoad);         
 </script>
 <script>
-        $(document).on('change','#depoff',function(){
+        $(document).on('change','#senderdepoff',function(){
             var did=$(this).val();
             var nurl="{{url('/filetracking')}}";
            $.ajax({
@@ -222,10 +332,28 @@
                 'dep_id':did
             },
             beforeSend:function(){
-                $('#branch').html('<option selected hidden>Fetching.........</option>');
+                $('#senderbranch').html('<option selected hidden>Fetching.........</option>');
             },
             success:function(p){
-                   $('#branch').html(p);
+                   $('#senderbranch').html(p);
+            }
+           });
+        });
+        $(document).on('change','#inidepoff',function(){
+            var did=$(this).val();
+            var nurl="{{url('/filetracking')}}";
+           $.ajax({
+            url:nurl+'/get-branch',
+            method:'post',
+            data:{
+                "_token":"{{csrf_token()}}",
+                'dep_id':did
+            },
+            beforeSend:function(){
+                $('#inibranch').html('<option selected hidden>Fetching.........</option>');
+            },
+            success:function(p){
+                   $('#inibranch').html(p);
             }
            });
         });
