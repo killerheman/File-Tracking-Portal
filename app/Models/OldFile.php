@@ -18,4 +18,8 @@ class OldFile extends Model
     {
         return $this->belongsTo(Branch::class, 'sender_branch');
     }
+    public function departureto()
+    {
+        return $this->belongsTo(Branch::class,'departure');
+    }
 }

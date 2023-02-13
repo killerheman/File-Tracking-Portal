@@ -17,10 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('file_no')->unique();
             $table->string('file_code')->unique();
-            $table->unsignedBigInteger('ini_department');
+            $table->unsignedBigInteger('ini_department')->nullable();
             $table->unsignedBigInteger('ini_branch');
-            $table->unsignedBigInteger('sender_department');
+            $table->unsignedBigInteger('sender_department')->nullable();
             $table->unsignedBigInteger('sender_branch');
+            $table->unsignedBigInteger('departure')->nullable();
             $table->string('subject')->nullable();
             $table->text('matter')->nullable();
             $table->date('receiving_date')->nullable();

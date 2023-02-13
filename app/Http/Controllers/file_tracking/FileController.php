@@ -288,8 +288,9 @@ class FileController extends Controller
         if(Auth::guard('fileuser')->user()->hasAnyRole(['Master File User','Admin','Super Admin']))
         {
              $department=Department::where('active',true)->get();
+             $branch=Branch::where('active',true)->get();
              $files = OldFile::latest()->get();
-             return view('filetrack.oldadd',compact('status','department','files'));
+             return view('filetrack.oldadd',compact('status','department','branch','files'));
         }
         else if(Auth::guard('fileuser')->user()->hasRole('Mid File User')){
             $department=Department::where('id',Auth::guard('fileuser')->user()->department_id)->get();
@@ -305,9 +306,10 @@ class FileController extends Controller
         $req->validate([
             'fileno'=>'required',
             'filecode'=>'required',
-            'inidepoff'=>'required',
+            // 'inidepoff'=>'required',
             'inibranch'=>'required',
-            'senderdepoff'=>'required',
+            // 'senderdepoff'=>'required',
+            'departure'=>'required',
             'senderbranch'=>'required',
             'subject'=>'required',
             'description'=>'nullable',

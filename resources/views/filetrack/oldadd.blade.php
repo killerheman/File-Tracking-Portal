@@ -12,8 +12,8 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header">
-        <h4 class="card-title">Add Old File</h4>
+    <div class="card-header ">
+            <h4 class="card-title">VCS File Movement Detail </h4>
         @if ($errors->any())
         @foreach ($errors->all() as $error)
             <div>{{$error}}</div>
@@ -54,30 +54,33 @@
                                         </div>
                                     </div>
                                     <div class="col-2 mb-1">
-                                        <label class="form-label" for="filecode"> File Code</label>
+                                        <label class="form-label" for="filecode"> Old File No</label>
                                     </div>
-                                    <div class="col-8 mb-1">
+                                    <div class="col-6 mb-1">
                                         <input type="text" class="form-control" name='filecode' required>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="" style="max-size: 50px">{!! DNS2D::getBarcodeHTML($code, 'QRCODE',2,2) !!}</div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group row">
                                             <div class="col-md-2 mb-1">
                                                 <span>Initiating/Relating Department</span>
                                             </div>
-                                            <div class="col-md-3 mb-1">
+                                            {{-- <div class="col-md-3 mb-1">
                                                 <label class="form-label" for="inidepoff">Department/Office</label>
                         
                                                 <select name="inidepoff" id="inidepoff" class="select2 form-control">
                                                     <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Department Or Office--'}}</option>
                                                     
-                                                    @foreach ($department as $depoff)
-                                                        <option value="{{$depoff->id}}">{{$depoff->name}}</option>
-                                                    @endforeach
+                                                    @forelse ( $department as $depoff )
+                                                    <option value="{{$depoff->id}}">{{$depoff->name}}</option>
+                                                    @empty
+                                                    
+                                                    @endforelse
                                                 </select>
-                                            </div>
-                                            <div class="col-md-3 mb-1">
-                                                <label class="form-label" for="inibranch">Branch</label>
-                        
+                                            </div> --}}
+                                            <div class="col-md-6 mb-1">
                                                 <select name="inibranch" id="inibranch" class="select2 form-control">
                                                     <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Branch--'}}</option>
                                                   @isset($branch)
@@ -94,7 +97,7 @@
                                             <div class="col-md-2 mb-1">
                                                 <span>File Receive From</span>
                                             </div>
-                                            <div class="col-md-3 mb-1">
+                                            {{-- <div class="col-md-3 mb-1">
                                                 <label class="form-label" for="senderdepoff">Department/Office</label>
                         
                                                 <select name="senderdepoff" id="senderdepoff" class="select2 form-control">
@@ -104,10 +107,8 @@
                                                         <option value="{{$depoff->id}}">{{$depoff->name}}</option>
                                                     @endforeach
                                                 </select>
-                                            </div>
-                                            <div class="col-md-3 mb-1">
-                                                <label class="form-label" for="senderbranch">File Receive from</label>
-                        
+                                            </div> --}}
+                                            <div class="col-md-6 mb-1">
                                                 <select name="senderbranch" id="senderbranch" class="select2 form-control">
                                                     <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Branch--'}}</option>
                                                   @isset($branch)
@@ -189,6 +190,36 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group row">
+                                            <div class="col-md-2 mb-1">
+                                                <span>Departure</span>
+                                            </div>
+                                            {{-- <div class="col-md-3 mb-1">
+                                                <label class="form-label" for="inidepoff">Department/Office</label>
+                        
+                                                <select name="inidepoff" id="inidepoff" class="select2 form-control">
+                                                    <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Department Or Office--'}}</option>
+                                                    
+                                                    @forelse ( $department as $depoff )
+                                                    <option value="{{$depoff->id}}">{{$depoff->name}}</option>
+                                                    @empty
+                                                    
+                                                    @endforelse
+                                                </select>
+                                            </div> --}}
+                                            <div class="col-md-6 mb-1">
+                                                <select name="departure" id="departure" class="select2 form-control">
+                                                    <option value="{{isset($editemployee)?$editemployee->off_dep_id:''}}">{{isset($editemployee)?$editemployee->OfficeDep->name:'--Select Branch--'}}</option>
+                                                  @isset($branch)
+                                                  @foreach ($branch as $br)
+                                                      <option value="{{$br->id}}">{{$br->name}}</option>
+                                                  @endforeach
+                                                  @endisset
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group row">
                                             <div class="col-md-2">
                                                <span>Remark</span>
                                             </div>
@@ -243,7 +274,7 @@
                                         <button type="reset" class="btn btn-outline-warning mr-1 mb-1">Reset</button>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="mt-1">{!! DNS2D::getBarcodeHTML($code, 'QRCODE') !!}</div>
+                                       
                                     </div>
                                 </div>
 
@@ -257,15 +288,15 @@
                 </div>
     </div>
 
-</div>
+
 
 <div class="card">
     <div class="card-header">
         All Old Files
     </div>
     <div class="card-body">
-        <table class="table table-responsive">
-            <thead>
+        <table class="table table-hover">
+            <thead >
                 <tr>
                     <th>Sr No</th>
                     <th>File Code</th>
@@ -274,6 +305,7 @@
                     <th>Subject</th>
                     <th>File Receiving Date</th>
                     <th>Date of approval</th>
+                    <th>Departure</th>
                     <th>File</th>
                 </tr>
             </thead>
@@ -287,6 +319,7 @@
                     <td>{{$file->subject}}</td>
                     <td>{{$file->receiving_date}}</td>
                     <td>{{$file->approval_date}}</td>
+                    <td>{{$file->departureto->name}}</td>
                     <td><a href="{{asset($file->file)}}" target="_blank">view</a></td>
                 </tr>
                 @endforeach
