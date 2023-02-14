@@ -335,6 +335,7 @@ class FileController extends Controller
             'matter'=>$req->description,
             'receiving_date'=>$req->file_receiving_date,
             'approval_date'=>$req->file_approval_date,
+            'departure'=>$req->departure??'',
             'file'=>'upload/oldfile/'.$file,
             'remark'=>$req->remark,
             'status'=>$req->status,

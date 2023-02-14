@@ -192,7 +192,7 @@
                                     <div class="col-12">
                                         <div class="form-group row">
                                             <div class="col-md-2 mb-1">
-                                                <span>Departure</span>
+                                                <span>Dispatch</span>
                                             </div>
                                             {{-- <div class="col-md-3 mb-1">
                                                 <label class="form-label" for="inidepoff">Department/Office</label>
@@ -306,7 +306,7 @@
                     <th>Subject</th>
                     <th>File Receiving Date</th>
                     <th>Date of approval</th>
-                    <th>Departure</th>
+                    <th>dispatch</th>
                     <th>File</th>
                 </tr>
             </thead>
