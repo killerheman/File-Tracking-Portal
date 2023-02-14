@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('backend/app-assets/vendors/css/forms/select/select2.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('backend/app-assets/css/plugins/forms/validation/form-validation.css')}}">
 
+<link rel="stylesheet" type="text/css" href="{{asset('backend/app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
 @endpush
 @section('content')
 
@@ -295,7 +296,7 @@
         All Old Files
     </div>
     <div class="card-body">
-        <table class="table table-hover">
+        <table class="table scroll-horizontal-vertical w-100">
             <thead >
                 <tr>
                     <th>Sr No</th>
@@ -327,6 +328,14 @@
         </table>
     </div>
 </div>
+
+
+
+
+
+
+
+\
 @endsection
 
 @section('script-area')
@@ -336,6 +345,15 @@
 <script src="{{asset('backend/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 <script src="{{asset('backend/app-assets/js/scripts/forms/select/form-select2.js')}}"></script>
 
+
+<script src="{{asset('backend/app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
+    <script src="{{asset('backend/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js')}}"></script>
+    <script src="{{asset('backend/app-assets/vendors/js/tables/datatable/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('backend/app-assets/vendors/js/tables/datatable/buttons.print.min.js')}}"></script>
+    <script src="{{asset('backend/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js')}}"></script>
+    // <script src="{{asset('backend/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js')}}"></script>
+    
+    <script src="{{asset('backend/app-assets/js/scripts/datatables/datatable.js')}}"></script>
 <script type="text/javascript">
     google.load("elements", "1", { packages: "transliteration" });
     var control;
