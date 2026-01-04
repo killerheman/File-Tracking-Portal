@@ -20,6 +20,16 @@ class OldFile extends Model
     }
     public function departureto()
     {
-        return $this->belongsTo(Branch::class,'departure');
+        return $this->belongsTo(Branch::class, 'departure');
+    }
+
+    public function getFileUrlAttribute()
+    {
+        if (!$this->file)
+            return '#';
+        if (str_starts_with($this->file, 'upload/')) {
+            return asset($this->file);
+        }
+        return asset('storage/' . $this->file);
     }
 }

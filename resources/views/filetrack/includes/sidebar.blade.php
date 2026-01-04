@@ -105,6 +105,18 @@
                 </ul>
             </li>
             @endcan
+            <li class=" nav-item"><a href="#"><i class="feather icon-clipboard"></i><span class="menu-title"
+                data-i18n="">Letter</span></a>
+                <ul class="menu-content">
+                    <li><a href="{{ route('filetrack.letter-dispatch') }}"><i></i><span class="menu-item"
+                        data-i18n="Outgoing Letter">Dispatch Letter</span></a>
+                    </li>
+                    <li><a href="{{ route('filetrack.letter-receive') }}"><i></i><span class="menu-item"
+                        data-i18n="Receive Letter">Receive Letter</span></a>
+                    </li>
+
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

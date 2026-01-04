@@ -321,7 +321,7 @@
                     <td>{{$file->receiving_date}}</td>
                     <td>{{$file->approval_date??''}}</td>
                     <td>{{$file->departureto->name??''}}</td>
-                    <td><a href="{{asset($file->file)}}" target="_blank">view</a></td>
+                    <td><a href="{{$file->file_url}}" target="_blank">view</a></td>
                 </tr>
                 @endforeach
             </tbody>
