@@ -50,11 +50,11 @@
                             <li><a href="{{ route('filetrack.generated-Files') }}"><i></i><span class="menu-item"
                                 data-i18n="Permissions">New Generated Files</span></a>
                              </li>
-                             
+
                         @endcanany
 
 
-                        @can(['File_read'])
+                        @can('File_read')
                             <li><a href="{{ route('filetrack.file-generate.create') }}"><i></i><span class="menu-item"
                                         data-i18n="Permissions">My Files</span></a>
                             </li>
@@ -68,7 +68,7 @@
                             </li>
                         @endcan
 
-                        <li><a href="{{ route('filetrack.pending-files') }}"><i></i><span class="menu-item"
+                        <li><a href="{{ route('filetrack.file-search') }}"><i></i><span class="menu-item"
                                     data-i18n="Permissions">Search Files</span></a>
                         </li>
                     </ul>
@@ -105,6 +105,18 @@
                 </ul>
             </li>
             @endcan
+            <li class=" nav-item"><a href="#"><i class="feather icon-clipboard"></i><span class="menu-title"
+                data-i18n="">Letter</span></a>
+                <ul class="menu-content">
+                    <li><a href="{{ route('filetrack.letter-dispatch') }}"><i></i><span class="menu-item"
+                        data-i18n="Outgoing Letter">Dispatch Letter</span></a>
+                    </li>
+                    <li><a href="{{ route('filetrack.letter-receive') }}"><i></i><span class="menu-item"
+                        data-i18n="Receive Letter">Receive Letter</span></a>
+                    </li>
+
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

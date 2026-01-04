@@ -34,7 +34,7 @@
                         </div>
                         <div class="card-body px-75">
                             <div class="table-responsive users-view-permission">
-                                <table class="table table-borderless">
+                                <table class="table table-borderless ">
                                     <thead>
                                         <tr>
                                             <th>Module</th>

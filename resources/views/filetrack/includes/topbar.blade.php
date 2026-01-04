@@ -33,11 +33,11 @@
                             id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"><i class="flag-icon flag-icon-us"></i><span
                                 class="selected-language">English</span></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown-flag"><a class="dropdown-item"
-                                href="#" data-language="en"><i class="flag-icon flag-icon-us"></i>
+                        <div class="dropdown-menu" aria-labelledby="dropdown-flag"><a class="dropdown-item" href="#"
+                                data-language="en"><i class="flag-icon flag-icon-us"></i>
                                 English</a><a class="dropdown-item" href="#" data-language="fr"><i
-                                    class="flag-icon flag-icon-fr"></i> French</a><a class="dropdown-item"
-                                href="#" data-language="de"><i class="flag-icon flag-icon-de"></i>
+                                    class="flag-icon flag-icon-fr"></i> French</a><a class="dropdown-item" href="#"
+                                data-language="de"><i class="flag-icon flag-icon-de"></i>
                                 German</a><a class="dropdown-item" href="#" data-language="pt"><i
                                     class="flag-icon flag-icon-pt"></i> Portuguese</a></div>
                     </li>
@@ -54,32 +54,37 @@
                         </div>
                     </li>
 
-                    <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label"
-                            href="#" data-toggle="dropdown"><i class="ficon feather icon-bell"></i><span
+                    <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"
+                            data-toggle="dropdown"><i class="ficon feather icon-bell"></i><span
                                 class="badge badge-pill badge-primary badge-up">{{ Auth::guard('fileuser')->user()->unreadnotifications->count() }}</span></a>
                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                             <li class="dropdown-menu-header">
                                 <div class="dropdown-header m-0 p-1">
-                                    <h5 class="white">{{ Auth::guard('fileuser')->user()->unreadnotifications->count() }} New App
+                                    <h5 class="white">
+                                        {{ Auth::guard('fileuser')->user()->unreadnotifications->count() }} New App
                                         Notifications</h5>
                                 </div>
                             </li>
                             <li class="scrollable-container media-list">
                                 @foreach (Auth::guard('fileuser')->user()->unreadnotifications as $notic)
-                                <a class="d-flex justify-content-between" href="{{route('filetrack.notification-read',$notic->id)}}" >
-                                    <div class="media d-flex align-items-start">
-                                        <div class="media-left"><i
-                                                class="feather icon-plus-square font-medium-5 primary"></i></div>
-                                        <div class="media-body">
-                                            <h6 class="primary media-heading">{{($notic->type=='App\Notifications\NewFile')?'New File Genaretd':''}}</h6><small
-                                                class="notification-text"><b>File Code-</b> {{$notic->data['code']}}</small>
-                                        </div><small>
-                                            <time class="media-meta" datetime="{{$notic->created_at}}">{{date('d-M-Y',strtotime($notic->created_at))}}</time></small>
-                                    </div>
-                                </a>
+                                    <a class="d-flex justify-content-between"
+                                        href="{{route('filetrack.notification-read', $notic->id)}}">
+                                        <div class="media d-flex align-items-start">
+                                            <div class="media-left"><i
+                                                    class="feather icon-plus-square font-medium-5 primary"></i></div>
+                                            <div class="media-body">
+                                                <h6 class="primary media-heading">
+                                                    {{($notic->type == 'App\Notifications\NewFile') ? 'New File Genaretd' : ''}}
+                                                </h6><small class="notification-text"><b>File Code-</b>
+                                                    {{$notic->data['code']}}</small>
+                                            </div><small>
+                                                <time class="media-meta"
+                                                    datetime="{{$notic->created_at}}">{{date('d-M-Y', strtotime($notic->created_at))}}</time></small>
+                                        </div>
+                                    </a>
                                 @endforeach
-                               
-                            
+
+
                             </li>
                             <li class="dropdown-menu-footer"><a class="dropdown-item p-1 text-center"
                                     href="javascript:void(0)">Read all notifications</a></li>
@@ -92,7 +97,7 @@
                                     class="user-name text-bold-600">{{ Auth::guard('fileuser')->user()->full_name }}</span>
                                 <span
                                     class="user-status">{{ Auth::guard('fileuser')->user()->roles[0]->name ?? 'User' }}</span>
-                            </div><span><img class="round" src="{{ asset(Auth::guard('fileuser')->user()->pic) }}"
+                            </div><span><img class="round" src="{{ Auth::guard('fileuser')->user()->pic_url }}"
                                     alt="avatar" height="40" width="40"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">

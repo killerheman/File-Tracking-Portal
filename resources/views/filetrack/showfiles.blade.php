@@ -16,7 +16,7 @@
         <h3 class="card-title">Created By Me Files</h3>
     </div>
     <div class="card-body">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-responsive">
             <thead>
                 <tr>
                     <th>Sr.No</th><th>File Code</th><th>File Number</th><th>Barcode</th><th>QR</th><th>Subject</th><th>Type</th><Th>Status </Th><th>Mode</th>  <th>Created By</th> <th>Current User</th><th>Action</th>
@@ -34,7 +34,7 @@
                         <td>{{$file->type->name??''}}</td>
                         <td>{{$file->filestatus->name??''}}</td>
                         <td>{{$file->mode->name}}</td>
-                        <td>{{$file->created_by_user->full_name}}</td> 
+                        <td>{{$file->created_by_user->full_name}}</td>
                         <td>{{$file->current_location->full_name}}</td>
                         <td>
                             <div class="dropdown">
@@ -45,7 +45,7 @@
                                     @if($file->mode->name=='generated')
                                     <a class="dropdown-item" href="{{route('filetrack.file-generate.edit',Crypt::encrypt($file->id))}}"> <i class="fa fa-pencil-square-o text-warning"></i> Edit</a>
                                     @endif
-                                    <a class="dropdown-item" href="{{route('filetrack.file-generate.show',Crypt::encrypt($file->id))}}"> <i class="fa fa-eye text-primary"></i> View</a>
+                                    <a class="dropdown-item" href="{{route('filetrack.trackingFile',Crypt::encrypt($file->id))}}"> <i class="fa fa-eye text-primary"></i> View</a>
                                     @if($file->mode->name=='generated')
                                     <a class="dropdown-item" href="#"> <i class="fa fa-trash text-danger"></i> Delete</a>
                                     @endif
