@@ -308,7 +308,8 @@ class FileController extends Controller
         ]);
         $file = '';
         if ($req->hasFile('file')) {
-            $file = $req->file->store('oldfile', 'public');
+            $file = 'oldfile-' . $req->fileno . '.' . $req->file->extension();
+            $req->file->move(public_path('upload/oldfile'), $file);
         }
         $res = OldFile::create([
             'file_no' => $req->fileno,
@@ -322,7 +323,7 @@ class FileController extends Controller
             'receiving_date' => $req->file_receiving_date,
             'approval_date' => $req->file_approval_date,
             'departure' => $req->departure ?? '',
-            'file' => $file,
+            'file' => 'upload/oldfile/' . $file,
             'remark' => $req->remark,
             'status' => $req->status,
             'created_by' => Auth::guard('fileuser')->user()->id,
